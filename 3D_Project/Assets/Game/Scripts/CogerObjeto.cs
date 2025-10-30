@@ -9,11 +9,36 @@ public class CogerObjeto : MonoBehaviour
     void Update()
     {
         
+        if (pickedObject != null)
+        {
+            if (Input.GetKey("q"))
+            {
+                pickedObject.GetComponent<Rigidbody>().useGravity = true;
+                pickedObject.GetComponent<Rigidbody>().isKinematic = false;
+                pickedObject.transform.SetParent(null);
+                pickedObject = null;
+            }
+        }
+
+
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("Objeto"))
+        if (other.gameObject.CompareTag("ObjetoAgarrable"))
+        {
+            if (Input.GetKey("e")) { 
+                other.GetComponent<Rigidbody>().useGravity = false;
+
+                other.GetComponent<Rigidbody>().useGravity = true;
+
+                other.transform.position = handPoint.transform.position;
+
+                other.gameObject.transform.SetParent(handPoint.gameObject.transform);
+
+                pickedObject = other.gameObject;
+            }
+        }
     }
 
 }
