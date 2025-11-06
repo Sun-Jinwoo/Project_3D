@@ -2,15 +2,17 @@ using UnityEngine;
 
 public class DayNightCicle : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    
     void Start()
     {
         
     }
 
-    // Update is called once per frame
+    //Nota: Se realiza para rotar la light y que cambie de dia a noche y viceversa
+    public int rotationScale = 10; 
+
     void Update()
     {
-        
+        transform.Rotate(rotationScale * Time.deltaTime, 0, 0);
     }
 }
