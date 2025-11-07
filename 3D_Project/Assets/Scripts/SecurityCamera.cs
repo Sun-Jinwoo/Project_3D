@@ -1,187 +1,171 @@
-using UnityEngine;
-using System;
+ï»¿using UnityEngine;
+using System.Collections;
 
 public class SecurityCamera : MonoBehaviour
 {
-    [SerializeField] private float rotationInterval = 3f; // Tiempo entre rotaciones (segundos)
-    [SerializeField] private float maxRotationAngle = 45f; // Ángulo máximo de rotación (izquierda y derecha)
-    [SerializeField] private float rotationSpeed = 90f; // Velocidad de rotación (grados/segundo)
-    [SerializeField] private float detectionRange = 10f; // Rango de detección
-    [SerializeField] private float fieldOfViewAngle = 60f; // Ángulo del campo de visión (grados)
-    [SerializeField] private LayerMask playerLayer; // Capa del jugador
-    [SerializeField] private Transform cameraHead; // Transform de la cabeza de la cámara (para rotar)
-    [SerializeField] private Material fovMaterial; // Material para el cono de visión (semitransparente)
-    [SerializeField] private int fovMeshSegments = 10; // Segmentos para la malla del cono
+    [Header("ConfiguraciÃ³n")]
+    public float viewRange = 10f;
+    public float viewAngle = 60f;
+    public LayerMask playerLayer;
+    public LayerMask obstacleLayer;
 
-    private float timer = 0f;
-    private Quaternion targetRotation;
-    private bool isRotating = false;
-    private bool rotateRight = true; // Dirección inicial: derecha
-    private float initialYAngle; // Ángulo inicial en Y
-    private GameObject fovCone; // Objeto que representa el cono de visión
-    public Action<Vector3> OnPlayerDetected; // Evento para notificar al NPC
+    [Header("Efectos")]
+    public Light spotLight;
+    public Color normalColor = Color.green;
+    public Color alertColor = Color.red;
+
+    [Header("RotaciÃ³n Oscilante")]
+    public bool oscillateCamera = true;
+    public float oscillateSpeed = 1f;           // Velocidad de oscilaciÃ³n
+    public float maxAngleLeft = 60f;            // MÃ¡ximo a la izquierda (grados)
+    public float maxAngleRight = -60f;          // MÃ¡ximo a la derecha (grados)
+
+    private Transform player;
+    private bool playerDetected = false;
+    private Coroutine oscillateRoutine;
 
     void Start()
     {
-        // Establecer rotación inicial
-        if (cameraHead == null) cameraHead = transform;
-        initialYAngle = cameraHead.eulerAngles.y;
-        targetRotation = cameraHead.rotation;
+        player = GameObject.FindGameObjectWithTag("Player")?.transform;
+        if (spotLight != null)
+            spotLight.color = normalColor;
 
-        // Crear el cono de visión
-        CreateFOVCone();
+        if (oscillateCamera)
+            oscillateRoutine = StartCoroutine(OscillateCamera());
     }
 
     void Update()
     {
-        // Temporizador para la rotación
-        timer += Time.deltaTime;
-        if (timer >= rotationInterval && !isRotating)
-        {
-            StartRotation();
-        }
-
-        // Rotar suavemente hacia el objetivo
-        if (isRotating)
-        {
-            cameraHead.rotation = Quaternion.RotateTowards(
-                cameraHead.rotation,
-                targetRotation,
-                rotationSpeed * Time.deltaTime
-            );
-
-            // Comprobar si la rotación está completa
-            if (Quaternion.Angle(cameraHead.rotation, targetRotation) < 0.1f)
-            {
-                isRotating = false;
-                timer = 0f;
-            }
-        }
-
-        // Actualizar la posición y rotación del cono de visión
-        UpdateFOVCone();
-
-        // Detección del jugador con campo de visión
-        DetectPlayer();
-    }
-
-    void StartRotation()
-    {
-        // Alternar dirección entre izquierda y derecha
-        float targetYAngle = initialYAngle + (rotateRight ? maxRotationAngle : -maxRotationAngle);
-        targetRotation = Quaternion.Euler(0f, targetYAngle, 0f);
-        rotateRight = !rotateRight; // Cambiar dirección para la próxima rotación
-        isRotating = true;
-    }
-
-    void DetectPlayer()
-    {
-        // Encontrar al jugador
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player == null) return;
+        CheckPlayerInVision();
+    }
 
-        // Verificar si el jugador está dentro del rango
-        Vector3 directionToPlayer = player.transform.position - cameraHead.position;
+    void CheckPlayerInVision()
+    {
+        Vector3 directionToPlayer = player.position - transform.position;
         float distanceToPlayer = directionToPlayer.magnitude;
 
-        if (distanceToPlayer <= detectionRange)
+        if (distanceToPlayer > viewRange)
         {
-            // Calcular el ángulo entre la dirección de la cámara y la dirección al jugador
-            float angleToPlayer = Vector3.Angle(cameraHead.forward, directionToPlayer);
+            SetDetected(false);
+            return;
+        }
 
-            // Comprobar si el jugador está dentro del campo de visión
-            if (angleToPlayer <= fieldOfViewAngle * 0.5f)
+        float angle = Vector3.Angle(transform.forward, directionToPlayer);
+        if (angle > viewAngle / 2f)
+        {
+            SetDetected(false);
+            return;
+        }
+
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, directionToPlayer.normalized, out hit, viewRange, obstacleLayer))
+        {
+            if (hit.transform != player)
             {
-                // Verificar si hay obstáculos usando raycast
-                Ray ray = new Ray(cameraHead.position, directionToPlayer);
-                RaycastHit hit;
-
-                if (Physics.Raycast(ray, out hit, detectionRange, playerLayer))
-                {
-                    if (hit.collider.CompareTag("Player"))
-                    {
-                        // Invocar evento para el NPC con la posición del jugador
-                        OnPlayerDetected?.Invoke(hit.point);
-                        Debug.Log("Jugador detectado en: " + hit.point);
-                    }
-                }
+                SetDetected(false);
+                return;
             }
         }
 
-        // Visualizar el campo de visión en la escena (para depuración)
-        Debug.DrawRay(cameraHead.position, Quaternion.Euler(0, -fieldOfViewAngle * 0.5f, 0) * cameraHead.forward * detectionRange, Color.red);
-        Debug.DrawRay(cameraHead.position, Quaternion.Euler(0, fieldOfViewAngle * 0.5f, 0) * cameraHead.forward * detectionRange, Color.red);
+        SetDetected(true);
     }
 
-    void CreateFOVCone()
+    void SetDetected(bool detected)
     {
-        // Crear un GameObject para el cono de visión
-        fovCone = new GameObject("FOVCone");
-        fovCone.transform.SetParent(cameraHead, false);
+        if (playerDetected == detected) return;
 
-        // Añadir MeshFilter y MeshRenderer
-        MeshFilter meshFilter = fovCone.AddComponent<MeshFilter>();
-        MeshRenderer meshRenderer = fovCone.AddComponent<MeshRenderer>();
-        meshRenderer.material = fovMaterial;
+        playerDetected = detected;
 
-        // Generar la malla del cono
-        Mesh mesh = new Mesh();
-        meshFilter.mesh = mesh;
+        if (spotLight != null)
+            spotLight.color = detected ? alertColor : normalColor;
 
-        // Crear vértices para el cono
-        Vector3[] vertices = new Vector3[fovMeshSegments + 1];
-        int[] triangles = new int[fovMeshSegments * 3];
-
-        vertices[0] = Vector3.zero; // Vértice en la base (posición de la cámara)
-        float angleStep = fieldOfViewAngle / fovMeshSegments;
-
-        // Generar vértices en el borde del cono
-        for (int i = 0; i < fovMeshSegments; i++)
+        if (detected)
         {
-            float angle = -fieldOfViewAngle * 0.5f + angleStep * i;
-            Vector3 direction = Quaternion.Euler(0, angle, 0) * Vector3.forward * detectionRange;
-            vertices[i + 1] = direction;
+            Debug.Log("Â¡Jugador detectado!");
+            OnPlayerDetected();
         }
-
-        // Generar triángulos
-        for (int i = 0; i < fovMeshSegments - 1; i++)
+        else
         {
-            triangles[i * 3] = 0;
-            triangles[i * 3 + 1] = i + 1;
-            triangles[i * 3 + 2] = i + 2;
-        }
-        // Último triángulo
-        triangles[(fovMeshSegments - 1) * 3] = 0;
-        triangles[(fovMeshSegments - 1) * 3 + 1] = fovMeshSegments;
-        triangles[(fovMeshSegments - 1) * 3 + 2] = 1;
-
-        mesh.vertices = vertices;
-        mesh.triangles = triangles;
-        mesh.RecalculateNormals();
-    }
-
-    void UpdateFOVCone()
-    {
-        // Asegurarse de que el cono siga la rotación de la cámara
-        if (fovCone != null)
-        {
-            fovCone.transform.position = cameraHead.position;
-            fovCone.transform.rotation = cameraHead.rotation;
+            OnPlayerLost();
         }
     }
 
-    // Método para conectar el NPC más tarde
-    public void SubscribeToPlayerDetection(Action<Vector3> npcCallback)
+    void OnPlayerDetected()
     {
-        OnPlayerDetected += npcCallback;
+        if (oscillateRoutine != null)
+            StopCoroutine(oscillateRoutine);
+
+        StartCoroutine(LookAtPlayer());
     }
 
-    void OnDestroy()
+    void OnPlayerLost()
     {
-        // Destruir el cono de visión al destruir la cámara
-        if (fovCone != null)
+        StopAllCoroutines();
+        if (oscillateCamera)
+            oscillateRoutine = StartCoroutine(OscillateCamera());
+    }
+
+    IEnumerator OscillateCamera()
+    {
+        Quaternion startRotation = transform.rotation;
+        float journey = 0f;
+
+        while (true)
         {
-            Destroy(fovCone);
+            journey = 0f;
+            // Ir a la izquierda
+            while (journey <= 1f)
+            {
+                journey += Time.deltaTime * oscillateSpeed;
+                float angle = Mathf.LerpAngle(0, maxAngleLeft, journey);
+                transform.rotation = startRotation * Quaternion.Euler(0, angle, 0);
+                yield return null;
+            }
+
+            journey = 0f;
+            // Ir a la derecha
+            while (journey <= 1f)
+            {
+                journey += Time.deltaTime * oscillateSpeed;
+                float angle = Mathf.LerpAngle(maxAngleLeft, maxAngleRight, journey);
+                transform.rotation = startRotation * Quaternion.Euler(0, angle, 0);
+                yield return null;
+            }
+        }
+    }
+
+    IEnumerator LookAtPlayer()
+    {
+        while (playerDetected)
+        {
+            Vector3 direction = player.position - transform.position;
+            direction.y = 0;
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 8f);
+            yield return null;
+        }
+    }
+
+    // Gizmos
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = playerDetected ? Color.red : Color.yellow;
+        Vector3 forward = transform.forward;
+        Vector3 leftBoundary = Quaternion.Euler(0, -viewAngle / 2, 0) * forward * viewRange;
+        Vector3 rightBoundary = Quaternion.Euler(0, viewAngle / 2, 0) * forward * viewRange;
+
+        Gizmos.DrawRay(transform.position, leftBoundary);
+        Gizmos.DrawRay(transform.position, rightBoundary);
+        Gizmos.DrawRay(transform.position, forward * viewRange);
+    }
+
+    // Trigger opcional (puedes eliminar si no lo usas)
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log("Â¡Intruso en el Ã¡rea!");
         }
     }
 }
