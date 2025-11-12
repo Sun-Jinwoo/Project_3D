@@ -3,6 +3,7 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     public float speed = 5f;
+    public float fast = 8f;
     public float JumpForce = 5f;
     public float sensibility = 2f;
     public float limitCamX = 45f;
@@ -77,34 +78,11 @@ public class Movement : MonoBehaviour
 
         //Sprint
         if (Input.GetKey(KeyCode.LeftShift))
-        { speed = 12f; }
+        { speed = fast; }
         else
         { speed = 5f; }
 
-        //Rotar
-        if (Input.GetKeyDown(KeyCode.X))
-        { RotarX(); }
-        if (Input.GetKeyDown(KeyCode.Y))
-        { RotarY(); }
-        if (Input.GetKeyDown(KeyCode.Z))
-        { RotarZ(); }
-        
-        //Rescalar
-        if (Input.GetKey(KeyCode.O))
-        {
-            transform.localScale = new Vector3(x,y,z);
-            x += VelocidadEscala;
-            y += VelocidadEscala;
-            z += VelocidadEscala;
-        }
 
-        if (Input.GetKey(KeyCode.I))
-        {
-            transform.localScale = new Vector3(x,y,z);
-            x -= VelocidadEscala;
-            y -= VelocidadEscala;
-            z -= VelocidadEscala;
-        }
     }
 
     //Collision con objetos

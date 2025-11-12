@@ -1,39 +1,30 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class NPCPatrol : MonoBehaviour
+public class NPC : MonoBehaviour
 {
     [Header("Movimiento base")]
-    public float speed = 2f;
-    public float stoppingDistance = 0.3f;
+    public float speedPatrulla = 2f;
     public Transform[] waypoints;
     private int currentWaypoint = 0;
+    private NavMeshAgent agent;
 
     [Header("Raycasts de detección")]
-    public float rangoCorto = 7f;
-    public float rangoLargo = 10f;
-    public float anguloBusquedaMin = -45f;
-    public float anguloBusquedaMax = 45f;
-    public float velocidadGiroBusqueda = 3f;
-    public float velocidadDeBusqueda = 4f;
-    public float tiempoBusqueda = 4f;
+    public float rangoCorto = 6f;
+    public float rangoLargo = 12f;
+    public float distanciaMinimaAlJugador = 2f;
+    public float tiempoPerderJugador = 2f;
+    public float tiempoBusqueda = 6f;
 
     [Header("Detección del jugador")]
-    public string Player = "Player";
+    public string playerTag = "Player";
     private Transform jugador;
-    private Vector3 puntoSospecha;
-    private bool enInvestigacion = false;
-    private bool enSospecha = false;
-    private bool enPersecucion = false;
+    private Vector3 ultimaPosicionVista;
 
-    [Header("Persecución")]
-    public float tiempoQuietoAntesDePerseguir = 1.5f;
-    public float tiempoExtraDePersecucion = 2f;
-
-    [Header("Sospecha")]
-    public float tiempoQuietoAntesDeSospechar = 1f;
-    public float velocidadDeSospecha = 3f;
+    private enum EstadoNPC { Patrulla, Sospecha, Persecucion, Busqueda }
+    private EstadoNPC estadoActual = EstadoNPC.Patrulla;
 
     [Header("Visual")]
     public Renderer indicadorRenderer;
@@ -42,265 +33,227 @@ public class NPCPatrol : MonoBehaviour
     public Material materialBusqueda;
     public Material materialAlerta;
 
+    private float tiempoSinVer = 0f;
+
     private void Start()
     {
+        agent = GetComponent<NavMeshAgent>();
         CambiarColor(materialNormal);
         if (waypoints.Length > 0)
-            transform.position = waypoints[0].position;
+        {
+            agent.speed = speedPatrulla;
+            agent.destination = waypoints[currentWaypoint].position;
+        }
     }
 
     private void Update()
     {
-        if (!enInvestigacion && !enSospecha && !enPersecucion)
+        DetectarJugador();
+
+        switch (estadoActual)
         {
-            Patrullar();
-            DetectarJugador();
-        }
-        else if (enPersecucion)
-        {
-            PerseguirJugador();
+            case EstadoNPC.Patrulla:
+                Patrullar();
+                break;
+            case EstadoNPC.Sospecha:
+                ModoSospecha();
+                break;
+            case EstadoNPC.Persecucion:
+                ModoPersecucion();
+                break;
+            case EstadoNPC.Busqueda:
+                ModoBusqueda();
+                break;
         }
 
+        // Visualización raycasts
         Debug.DrawRay(transform.position + Vector3.up * 0.4f, transform.forward * rangoCorto, Color.red);
         Debug.DrawRay(transform.position + Vector3.up * 0.4f, transform.forward * rangoLargo, Color.yellow);
-    }
-
-    // ---------------------- COMPORTAMIENTO DE PATRULLA ----------------------
-    void Patrullar()
-    {
-        if (waypoints.Length == 0) return;
-
-        Transform objetivo = waypoints[currentWaypoint];
-        Vector3 direccion = (objetivo.position - transform.position).normalized;
-        direccion.y = 0f;
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direccion), Time.deltaTime * 3f);
-        MoverEnTerreno(transform.forward, speed);
-
-        if (Vector3.Distance(transform.position, objetivo.position) < stoppingDistance)
-            currentWaypoint = (currentWaypoint + 1) % waypoints.Length;
     }
 
     // ---------------------- DETECCIÓN DEL JUGADOR ----------------------
     void DetectarJugador()
     {
-        Ray rayoLargo = new Ray(transform.position, transform.forward * rangoLargo);
-        Ray rayoCorto = new Ray(transform.position + Vector3.up * 0.4f, transform.forward * rangoCorto);
+        Ray rayCorto = new Ray(transform.position + Vector3.up * 0.4f, transform.forward);
+        Ray rayLargo = new Ray(transform.position + Vector3.up * 0.4f, transform.forward);
         RaycastHit hit;
 
-        bool detectaCorto = false;
-        bool detectaLargo = false;
+        bool veCorto = false;
+        bool veLargo = false;
 
-        // Rango corto → persecución directa (prioritaria)
-        if (Physics.Raycast(rayoCorto, out hit, rangoCorto))
+        if (Physics.Raycast(rayCorto, out hit, rangoCorto))
         {
-            if (hit.collider.CompareTag(Player))
+            if (hit.collider.CompareTag(playerTag))
             {
                 jugador = hit.collider.transform;
-                detectaCorto = true;
+                ultimaPosicionVista = jugador.position;
+                veCorto = true;
             }
         }
 
-        // Rango largo → sospecha o seguimiento si no hay persecución
-        if (Physics.Raycast(rayoLargo, out hit, rangoLargo))
+        if (Physics.Raycast(rayLargo, out hit, rangoLargo))
         {
-            if (hit.collider.CompareTag(Player))
+            if (hit.collider.CompareTag(playerTag))
             {
                 jugador = hit.collider.transform;
-                detectaLargo = true;
+                ultimaPosicionVista = jugador.position;
+                veLargo = true;
             }
         }
 
-        // PRIORIDADES:
-        if (detectaCorto)
+        // PRIORIDADES
+        if (veCorto)
         {
-            // Si el corto lo detecta, ignora cualquier sospecha y persigue directamente
-            if (!enPersecucion)
-                StartCoroutine(IniciarPersecucion());
+            CambiarEstado(EstadoNPC.Persecucion);
         }
-        else if (detectaLargo && !enSospecha && !enPersecucion)
+        else if (veLargo && estadoActual != EstadoNPC.Persecucion)
         {
-            StartCoroutine(EntrarEnSospecha());
+            CambiarEstado(EstadoNPC.Sospecha);
         }
     }
 
-    // ---------------------- ESTADOS DE COMPORTAMIENTO ----------------------
-
-    // 🟡 Sospecha (raycast largo)
-    private IEnumerator EntrarEnSospecha()
+    // ---------------------- PATRULLA ----------------------
+    void Patrullar()
     {
-        enSospecha = true;
+        if (!agent.pathPending && agent.remainingDistance < 0.3f)
+        {
+            currentWaypoint = (currentWaypoint + 1) % waypoints.Length;
+            agent.destination = waypoints[currentWaypoint].position;
+        }
+    }
+
+    // ---------------------- SOSPECHA ----------------------
+    void ModoSospecha()
+    {
+        agent.speed = speedPatrulla * 1.2f;
         CambiarColor(materialSospecha);
+        agent.destination = ultimaPosicionVista;
 
-        // 1. Quieto brevemente antes de moverse
-        yield return new WaitForSeconds(tiempoQuietoAntesDeSospechar);
-
-        // 2. Mientras detecte al jugador con el rayo largo, se moverá hacia él
-        float tiempoSinVer = 0f;
-        while (true)
+        if (!agent.pathPending && agent.remainingDistance < 1f)
         {
-            Ray rayoLargo = new Ray(transform.position + Vector3.up * 0.4f, transform.forward);
-            RaycastHit hit;
-            bool veJugador = false;
+            tiempoSinVer += Time.deltaTime;
 
-            if (Physics.Raycast(rayoLargo, out hit, rangoLargo))
+            // busca por un rato
+            if (tiempoSinVer >= tiempoBusqueda)
             {
-                if (hit.collider.CompareTag(Player))
-                {
-                    veJugador = true;
-                    jugador = hit.collider.transform;
-                    puntoSospecha = jugador.position;
-                }
-            }
-
-            // Si durante este tiempo lo detecta por el rayo corto, pasar a persecución
-            Ray rayoCorto = new Ray(transform.position + Vector3.up * 0.4f, transform.forward);
-            if (Physics.Raycast(rayoCorto, out hit, rangoCorto) && hit.collider.CompareTag(Player))
-            {
-                StartCoroutine(IniciarPersecucion());
-                enSospecha = false;
-                yield break;
-            }
-
-            if (veJugador && jugador != null)
-            {
-                // Seguir al jugador mientras se lo vea
-                Vector3 dir = (jugador.position - transform.position).normalized;
-                dir.y = 0f;
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * 3f);
-                MoverEnTerreno(transform.forward, velocidadDeSospecha);
                 tiempoSinVer = 0f;
+                CambiarEstado(EstadoNPC.Patrulla);
             }
-            else
-            {
-                // Si no lo ve más, ir al último punto donde fue visto
-                tiempoSinVer += Time.deltaTime;
-                Vector3 dir = (puntoSospecha - transform.position).normalized;
-                dir.y = 0f;
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * 3f);
-                MoverEnTerreno(transform.forward, velocidadDeSospecha);
-
-                if (tiempoSinVer > 2f)
-                {
-                    break; // deja de sospechar y pasa a búsqueda
-                }
-            }
-
-            yield return null;
         }
-
-        // 3. Al llegar o no ver más al jugador, iniciar búsqueda
-        enSospecha = false;
-        StartCoroutine(BuscarJugador());
     }
 
-    // 🔍 Investigación (rotación entre ángulos)
-    private IEnumerator BuscarJugador()
+    // ---------------------- PERSECUCIÓN ----------------------
+    void ModoPersecucion()
     {
-        enInvestigacion = true;
-        CambiarColor(materialBusqueda);
-
-        float tiempo = 0f;
-        bool haciaMax = true;
-
-        while (tiempo < tiempoBusqueda)
+        if (jugador == null)
         {
-            DetectarJugador();
-
-            float direccionGiro = haciaMax ? 1f : -1f;
-            transform.Rotate(Vector3.up * direccionGiro * velocidadGiroBusqueda * Time.deltaTime);
-
-            float anguloY = NormalizarAngulo(transform.eulerAngles.y);
-            if (anguloY >= anguloBusquedaMax) haciaMax = false;
-            if (anguloY <= anguloBusquedaMin) haciaMax = true;
-
-            tiempo += Time.deltaTime;
-            yield return null;
+            CambiarEstado(EstadoNPC.Busqueda);
+            return;
         }
 
-        enInvestigacion = false;
-        CambiarColor(materialNormal);
-    }
-
-    // 🔴 Persecución directa
-    private IEnumerator IniciarPersecucion()
-    {
-        enPersecucion = true;
         CambiarColor(materialAlerta);
+        agent.speed = speedPatrulla * 1.8f;
 
-        // Pausa inicial (reacción)
-        yield return new WaitForSeconds(tiempoQuietoAntesDePerseguir);
+        agent.SetDestination(jugador.position);
 
-        float tiempoSinVer = 0f;
+        float distancia = Vector3.Distance(transform.position, jugador.position);
 
-        while (enPersecucion)
+        if (distancia <= distanciaMinimaAlJugador)
         {
-            Ray rayoCorto = new Ray(transform.position + Vector3.up * 0.4f, transform.forward);
-            RaycastHit hit;
-            bool veJugador = false;
+            // NPC alcanzó al jugador (aquí podrías implementar daño o interacción)
+            agent.isStopped = true;
+        }
+        else
+        {
+            agent.isStopped = false;
+        }
 
-            if (Physics.Raycast(rayoCorto, out hit, rangoCorto))
+        // Si no lo ve, empieza conteo para perderlo
+        Ray rayCorto = new Ray(transform.position + Vector3.up * 0.4f, transform.forward);
+        RaycastHit hit;
+        if (Physics.Raycast(rayCorto, out hit, rangoCorto))
+        {
+            if (hit.collider.CompareTag(playerTag))
             {
-                if (hit.collider.CompareTag(Player))
-                {
-                    veJugador = true;
-                    jugador = hit.collider.transform;
-                }
-            }
-
-            if (veJugador && jugador != null)
-            {
-                Vector3 dir = (jugador.position - transform.position).normalized;
-                dir.y = 0f;
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * 5f);
-                MoverEnTerreno(transform.forward, speed * 1.6f);
                 tiempoSinVer = 0f;
             }
-            else
+        }
+        else
+        {
+            tiempoSinVer += Time.deltaTime;
+            if (tiempoSinVer >= tiempoPerderJugador)
             {
-                tiempoSinVer += Time.deltaTime;
-                MoverEnTerreno(transform.forward, speed * 1.2f);
-
-                if (tiempoSinVer >= tiempoExtraDePersecucion)
-                {
-                    enPersecucion = false;
-                    StartCoroutine(BuscarJugador());
-                }
+                tiempoSinVer = 0f;
+                ultimaPosicionVista = jugador.position;
+                CambiarEstado(EstadoNPC.Busqueda);
             }
-
-            yield return null;
         }
     }
 
-    private void PerseguirJugador() { }
+    // ---------------------- BÚSQUEDA ----------------------
+    void ModoBusqueda()
+    {
+        CambiarColor(materialBusqueda);
+        agent.speed = speedPatrulla;
+        agent.destination = ultimaPosicionVista;
 
-    // ---------------------- UTILIDADES ----------------------
-    private void CambiarColor(Material mat)
+        tiempoSinVer += Time.deltaTime;
+
+        // Movimiento leve aleatorio en el área
+        if (!agent.pathPending && agent.remainingDistance < 0.5f)
+        {
+            Vector3 randomPoint = ultimaPosicionVista + new Vector3(Random.Range(-3, 3), 0, Random.Range(-3, 3));
+            NavMeshHit hit;
+            if (NavMesh.SamplePosition(randomPoint, out hit, 2f, NavMesh.AllAreas))
+                agent.destination = hit.position;
+        }
+
+        if (tiempoSinVer >= tiempoBusqueda)
+        {
+            tiempoSinVer = 0f;
+            CambiarEstado(EstadoNPC.Patrulla);
+        }
+    }
+
+    // ---------------------- CAMBIO DE ESTADO ----------------------
+    void CambiarEstado(EstadoNPC nuevoEstado)
+    {
+        if (estadoActual == nuevoEstado) return;
+
+        estadoActual = nuevoEstado;
+        tiempoSinVer = 0f;
+
+        switch (estadoActual)
+        {
+            case EstadoNPC.Patrulla:
+                CambiarColor(materialNormal);
+                agent.speed = speedPatrulla;
+                agent.destination = waypoints[currentWaypoint].position;
+                break;
+
+            case EstadoNPC.Sospecha:
+                CambiarColor(materialSospecha);
+                agent.speed = speedPatrulla * 1.2f;
+                agent.destination = ultimaPosicionVista;
+                break;
+
+            case EstadoNPC.Persecucion:
+                CambiarColor(materialAlerta);
+                agent.speed = speedPatrulla * 1.8f;
+                break;
+
+            case EstadoNPC.Busqueda:
+                CambiarColor(materialBusqueda);
+                agent.speed = speedPatrulla;
+                agent.destination = ultimaPosicionVista;
+                break;
+        }
+    }
+
+    // ---------------------- UTILIDAD VISUAL ----------------------
+    void CambiarColor(Material mat)
     {
         if (indicadorRenderer != null && mat != null)
             indicadorRenderer.material = mat;
-    }
-
-    private float NormalizarAngulo(float angulo)
-    {
-        if (angulo > 180f) angulo -= 360f;
-        return angulo;
-    }
-
-    // ✅ Mantener al NPC sobre el terreno
-    private void MoverEnTerreno(Vector3 direccion, float velocidad)
-    {
-        Vector3 movimiento = direccion * velocidad * Time.deltaTime;
-        transform.position += movimiento;
-
-        RaycastHit suelo;
-        if (Physics.Raycast(transform.position + Vector3.up * 1f, Vector3.down, out suelo, 3f))
-        {
-            if (suelo.collider.CompareTag("Ground"))
-            {
-                Vector3 pos = transform.position;
-                pos.y = suelo.point.y;
-                transform.position = pos;
-            }
-        }
     }
 }
