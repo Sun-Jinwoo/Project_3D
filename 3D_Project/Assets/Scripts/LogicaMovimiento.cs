@@ -15,11 +15,17 @@ public class LogicaMovimiento : MonoBehaviour
     public float fuerzaDeSalto = 8f;
     public bool puedoSaltar;
 
+    public float velocidadInicial;
+    public float velocidadAgachado;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         puedoSaltar = false;
         anim = GetComponent<Animator>();
+
+        velocidadInicial = movementSpeed;
+        velocidadAgachado = movementSpeed * 0.5f;
     }
 
     private void FixedUpdate()
@@ -44,7 +50,13 @@ public class LogicaMovimiento : MonoBehaviour
                 anim.SetBool("salte", true);
                 rb.AddForce(new Vector3(0, fuerzaDeSalto, 0), ForceMode.Impulse);
             }
+            if (Input.GetKey(KeyCode.LeftControl))
+            {
+              anim.SetBool("agachado", true);
+              movementSpeed = velocidadAgachado;
+            }
             anim.SetBool("tocoSuelo", true);
+            movementSpeed = velocidadInicial;
         }
         else
         {
