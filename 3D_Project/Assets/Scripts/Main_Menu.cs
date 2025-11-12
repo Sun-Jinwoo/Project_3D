@@ -30,6 +30,6 @@ public class Main_Menu : MonoBehaviour
 
     public void PlayGame()
     {
-        SceneManager.LoadScene("01_Robo_Casa");
+        SceneManager.LoadScene("03_Robo_Banco");
     }
 }
