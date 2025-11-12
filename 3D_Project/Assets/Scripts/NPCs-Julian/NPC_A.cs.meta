@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 5853530fda34ac74798023c621fe3a88
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - indicadorRenderer: {instanceID: 0}
+  - materialNormal: {fileID: 2100000, guid: 2ab711ae5ee913d4c926b65a78fc52e5, type: 2}
+  - materialSospecha: {fileID: 2100000, guid: b8d173fae9e8c9947b5a81c6562b1fa4, type: 2}
+  - materialBusqueda: {fileID: 2100000, guid: 66ce1e4d8cad70249a2f268dff7586e1, type: 2}
+  - materialAlerta: {fileID: 2100000, guid: 73a93d986d1d3024c916f83ee4c10db0, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
