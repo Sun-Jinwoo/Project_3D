@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 3
   tags:
   - ObjetoAgarrable
+  - Ground
+  - DeathZone
   layers:
   - Default
   - TransparentFX
