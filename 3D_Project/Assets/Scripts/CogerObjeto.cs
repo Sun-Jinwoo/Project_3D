@@ -8,31 +8,40 @@ public class CogerObjeto : MonoBehaviour
 
     void Update()
     {
-        // SOLTAR con Q
-        if (pickedObject != null && Keyboard.current.qKey.isPressed)
+        if (pickedObject != null)
         {
-            Rigidbody rb = pickedObject.GetComponent<Rigidbody>();
-            rb.useGravity = true;
-            rb.isKinematic = false;
-            pickedObject.transform.SetParent(null);
-            pickedObject = null;
+            if (Input.GetKey("q"))
+            {
+                pickedObject.GetComponent<Rigidbody>().useGravity = true;
+
+                pickedObject.GetComponent <Rigidbody>().isKinematic = false;
+
+                pickedObject.gameObject.transform.SetParent(null);
+
+                pickedObject = null;
+            }
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("ObjetoAgarrable"))
+        if (other.gameObject.CompareTag("ObjetoAgarrable"))
         {
-            // AGARRAR con E (solo una vez al pulsar)
-            if (Keyboard.current.eKey.wasPressedThisFrame)
+            if (Input.GetKey("e") && pickedObject == null)
             {
-                Rigidbody rb = other.GetComponent<Rigidbody>();
-                rb.useGravity = false;
-                rb.isKinematic = true;
+                other.GetComponent<Rigidbody>().useGravity = false;
+
+                other.GetComponent <Rigidbody>().isKinematic = true;
+
                 other.transform.position = handPoint.transform.position;
-                other.transform.SetParent(handPoint.transform);
+
+                other.gameObject.transform.SetParent(handPoint.gameObject.transform);
+
                 pickedObject = other.gameObject;
+
             }
+
         }
+        
     }
 }
