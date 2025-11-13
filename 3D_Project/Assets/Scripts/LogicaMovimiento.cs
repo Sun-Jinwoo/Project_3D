@@ -17,6 +17,9 @@ public class LogicaMovimiento : MonoBehaviour
 
     public float velocidadInicial;
     public float velocidadAgachado;
+    internal bool destruirAutomatico;
+
+    public bool destruirConCursor { get; internal set; }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -30,8 +33,13 @@ public class LogicaMovimiento : MonoBehaviour
 
     private void FixedUpdate()
     {
-        transform.Rotate(0, x * Time.deltaTime * rotationSpeed, 0);
-        transform.Translate(0, 0, y * Time.deltaTime * movementSpeed);
+        // Rotación suave
+        float rotation = x * rotationSpeed * Time.fixedDeltaTime;
+        rb.MoveRotation(rb.rotation * Quaternion.Euler(0, rotation, 0));
+
+        // Movimiento
+        Vector3 movement = transform.forward * y * movementSpeed * Time.fixedDeltaTime;
+        rb.MovePosition(rb.position + movement);
     }
     // Update is called once per frame
     void Update()
