@@ -2,16 +2,8 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!78 &1
 TagManager:
-<<<<<<< HEAD
-  serializedVersion: 2
-  tags: []
-=======
   serializedVersion: 3
-  tags:
-  - ObjetoAgarrable
-  - Ground
-  - DeathZone
->>>>>>> Julian-Sanchez-3.0
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -19,10 +11,10 @@ TagManager:
   - 
   - Water
   - UI
-  - Obstacles
-  - Torreta 1
-  - Torreta 2
-  - NPC
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
@@ -51,34 +43,3 @@ TagManager:
     locked: 0
   m_RenderingLayers:
   - Default
-  - Light Layer 1
-  - Light Layer 2
-  - Light Layer 3
-  - Light Layer 4
-  - Light Layer 5
-  - Light Layer 6
-  - Light Layer 7
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
