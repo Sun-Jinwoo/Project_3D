@@ -60,11 +60,15 @@ public class LogicaMovimiento : MonoBehaviour
             }
             if (Input.GetKey(KeyCode.LeftControl))
             {
-              anim.SetBool("agachado", true);
-              movementSpeed = velocidadAgachado;
+                anim.SetBool("agachado", true);
+                movementSpeed = velocidadAgachado;
+            }
+            else 
+            {
+                anim.SetBool("agachado", false);
+                movementSpeed = velocidadInicial;
             }
             anim.SetBool("tocoSuelo", true);
-            movementSpeed = velocidadInicial;
         }
         else
         {
