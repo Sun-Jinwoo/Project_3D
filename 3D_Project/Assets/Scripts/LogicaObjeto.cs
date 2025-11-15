@@ -51,6 +51,14 @@ public class LogicaObjeto : MonoBehaviour
                 logicaMovimiento.velocidadInicial += 5;
                 break;
             case 3:
+                // En vez de aumentar fuerza de salto: sumar punto al jugador y destruir este objeto
+                if (logicaMovimiento != null)
+                {
+                    logicaMovimiento.SumarPunto();
+                }
+                Destroy(gameObject);
+                break;
+            case 4:
                 logicaMovimiento.fuerzaDeSalto += 10;
                 break;
             default:

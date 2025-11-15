@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public class LogicaMovimiento : MonoBehaviour
 {
@@ -81,5 +82,10 @@ public class LogicaMovimiento : MonoBehaviour
     {
         anim.SetBool("tocoSuelo", false);
         anim.SetBool("salte", false);
+    }
+
+    internal void SumarPunto()
+    {
+        throw new NotImplementedException();
     }
 }

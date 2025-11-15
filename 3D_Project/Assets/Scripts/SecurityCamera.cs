@@ -16,9 +16,12 @@ public class SecurityCamera : MonoBehaviour
 
     [Header("Rotación Oscilante")]
     public bool oscillateCamera = true;
-    public float oscillateSpeed = 1f;           // Velocidad de oscilación
-    public float maxAngleLeft = 60f;            // Máximo a la izquierda (grados)
-    public float maxAngleRight = -60f;          // Máximo a la derecha (grados)
+    public float oscillateSpeed = 1f; // Velocidad de oscilación
+    public float maxAngleLeft = 60f; // Máximo a la izquierda (grados)
+    public float maxAngleRight = -60f; // Máximo a la derecha (grados)
+
+    [Header("NPC")]
+    public SeguridadNPC npc;
 
     private Transform player;
     private bool playerDetected = false;
@@ -29,7 +32,6 @@ public class SecurityCamera : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
         if (spotLight != null)
             spotLight.color = normalColor;
-
         if (oscillateCamera)
             oscillateRoutine = StartCoroutine(OscillateCamera());
     }
@@ -44,20 +46,17 @@ public class SecurityCamera : MonoBehaviour
     {
         Vector3 directionToPlayer = player.position - transform.position;
         float distanceToPlayer = directionToPlayer.magnitude;
-
         if (distanceToPlayer > viewRange)
         {
             SetDetected(false);
             return;
         }
-
         float angle = Vector3.Angle(transform.forward, directionToPlayer);
         if (angle > viewAngle / 2f)
         {
             SetDetected(false);
             return;
         }
-
         RaycastHit hit;
         if (Physics.Raycast(transform.position, directionToPlayer.normalized, out hit, viewRange, obstacleLayer))
         {
@@ -67,19 +66,15 @@ public class SecurityCamera : MonoBehaviour
                 return;
             }
         }
-
         SetDetected(true);
     }
 
     void SetDetected(bool detected)
     {
         if (playerDetected == detected) return;
-
         playerDetected = detected;
-
         if (spotLight != null)
             spotLight.color = detected ? alertColor : normalColor;
-
         if (detected)
         {
             Debug.Log("¡Jugador detectado!");
@@ -95,8 +90,8 @@ public class SecurityCamera : MonoBehaviour
     {
         if (oscillateRoutine != null)
             StopCoroutine(oscillateRoutine);
-
         StartCoroutine(LookAtPlayer());
+        npc?.Alertar();  // Notifica al NPC para iniciar persecución
     }
 
     void OnPlayerLost()
@@ -104,13 +99,13 @@ public class SecurityCamera : MonoBehaviour
         StopAllCoroutines();
         if (oscillateCamera)
             oscillateRoutine = StartCoroutine(OscillateCamera());
+        npc?.DetenerAlerta();  // Notifica al NPC para detener persecución
     }
 
     IEnumerator OscillateCamera()
     {
         Quaternion startRotation = transform.rotation;
         float journey = 0f;
-
         while (true)
         {
             journey = 0f;
@@ -122,7 +117,6 @@ public class SecurityCamera : MonoBehaviour
                 transform.rotation = startRotation * Quaternion.Euler(0, angle, 0);
                 yield return null;
             }
-
             journey = 0f;
             // Ir a la derecha
             while (journey <= 1f)
@@ -154,7 +148,6 @@ public class SecurityCamera : MonoBehaviour
         Vector3 forward = transform.forward;
         Vector3 leftBoundary = Quaternion.Euler(0, -viewAngle / 2, 0) * forward * viewRange;
         Vector3 rightBoundary = Quaternion.Euler(0, viewAngle / 2, 0) * forward * viewRange;
-
         Gizmos.DrawRay(transform.position, leftBoundary);
         Gizmos.DrawRay(transform.position, rightBoundary);
         Gizmos.DrawRay(transform.position, forward * viewRange);
