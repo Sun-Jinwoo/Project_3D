@@ -3409,6 +3409,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NPC
       objectReference: {fileID: 0}
+    - target: {fileID: 7871430833270386920, guid: 7ca467a024401084ebcadb58735eed83, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8985579354890569806, guid: 7ca467a024401084ebcadb58735eed83, type: 3}
       propertyPath: panelGameOver
       value: 
@@ -3429,7 +3433,7 @@ PrefabInstance:
     - target: {fileID: 3818291642452291648, guid: a9133d07a6b6fdb45bc85e1dfc2357ba, type: 3}
       propertyPath: npc
       value: 
-      objectReference: {fileID: 1863898602}
+      objectReference: {fileID: 0}
     - target: {fileID: 3818291642452291648, guid: a9133d07a6b6fdb45bc85e1dfc2357ba, type: 3}
       propertyPath: npcsEspecificos.Array.size
       value: 1
