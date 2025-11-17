@@ -76,7 +76,7 @@ public class NPC_B : MonoBehaviour
         Debug.DrawRay(transform.position + Vector3.up * 0.4f, transform.forward * rangoCorto, Color.red);
     }
 
-    // ---------------------- DETECCI�N ----------------------
+    // ---------------------- DETECCION ----------------------
     void DetectarJugador()
     {
         if (jugador == null)
@@ -116,6 +116,12 @@ public class NPC_B : MonoBehaviour
             }
         }
     }
+    public void RecibirAlarma(Vector3 punto)
+    {
+        CambiarEstado(EstadoNPC.Sospecha);
+        ultimaPosicionVista = punto;
+    }
+
 
     // ---------------------- PATRULLA ----------------------
     void Patrullar()

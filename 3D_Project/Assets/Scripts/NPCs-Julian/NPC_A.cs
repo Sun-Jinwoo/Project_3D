@@ -160,7 +160,7 @@ public class NPC_A : MonoBehaviour
         if (jugador == null) return;
 
         CambiarColor(materialAlerta);
-        agent.speed = speedPatrulla * speedPersecusion;
+        agent.speed = speedPersecusion;
         agent.SetDestination(jugador.position);
 
         float distancia = Vector3.Distance(transform.position, jugador.position);
@@ -327,6 +327,27 @@ public class NPC_A : MonoBehaviour
                 break;
         }
     }
+    public void RecibirAlarma(Vector3 puntoAlarma)
+    {
+        StopAllCoroutines();
+        buscandoDireccion = true;
+        CambiarColor(materialBusqueda);
+        StartCoroutine(MoverAlPuntoDeAlarma(puntoAlarma));
+    }
+
+    private IEnumerator MoverAlPuntoDeAlarma(Vector3 punto)
+    {
+        while (Vector3.Distance(transform.position, punto) > 1f)
+        {
+            Vector3 direccion = (punto - transform.position).normalized;
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direccion), Time.deltaTime * 3);
+            agent.SetDestination(punto);
+            yield return null;
+        }
+
+        ModoBusqueda();
+    }
+
 
     // ---------------------- VISUAL ----------------------
     void CambiarColor(Material mat)
