@@ -8046,6 +8046,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 668372715677268848, guid: 4f2f80001c6fe9341b90719757e44fe7, type: 3}
+      propertyPath: puerta
+      value: 
+      objectReference: {fileID: 1592880296}
+    - target: {fileID: 668372715677268848, guid: 4f2f80001c6fe9341b90719757e44fe7, type: 3}
+      propertyPath: objeto1
+      value: 
+      objectReference: {fileID: 1640780416}
+    - target: {fileID: 668372715677268848, guid: 4f2f80001c6fe9341b90719757e44fe7, type: 3}
+      propertyPath: objeto2
+      value: 
+      objectReference: {fileID: 1640780416}
+    - target: {fileID: 668372715677268848, guid: 4f2f80001c6fe9341b90719757e44fe7, type: 3}
+      propertyPath: rotationSpeed
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 668372715677268848, guid: 4f2f80001c6fe9341b90719757e44fe7, type: 3}
+      propertyPath: objectToRotate
+      value: 
+      objectReference: {fileID: 1592880296}
+    - target: {fileID: 668372715677268848, guid: 4f2f80001c6fe9341b90719757e44fe7, type: 3}
+      propertyPath: interactTrigger
+      value: 
+      objectReference: {fileID: 1640780417}
     - target: {fileID: 4504080390542658672, guid: 4f2f80001c6fe9341b90719757e44fe7, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -14185,9 +14209,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 64340472}
     - target: {fileID: 5740379958036470011, guid: f6d2a2863c1d03145a13dd0adef34c1d, type: 3}
+      propertyPath: LokpickingGame
+      value: 
+      objectReference: {fileID: 1165554511}
+    - target: {fileID: 5740379958036470011, guid: f6d2a2863c1d03145a13dd0adef34c1d, type: 3}
       propertyPath: objetoAActivar
       value: 
       objectReference: {fileID: 247975710}
+    - target: {fileID: 5740379958036470011, guid: f6d2a2863c1d03145a13dd0adef34c1d, type: 3}
+      propertyPath: lockpickingGame
+      value: 
+      objectReference: {fileID: 1165554511}
     - target: {fileID: 9221103374349531648, guid: f6d2a2863c1d03145a13dd0adef34c1d, type: 3}
       propertyPath: m_Name
       value: Cylinder
@@ -32291,6 +32323,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 463036, guid: 7d7abf56cba1c7a4990a17018e2ae1fd, type: 3}
   m_PrefabInstance: {fileID: 1163492517}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1165554511 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 668372715677268848, guid: 4f2f80001c6fe9341b90719757e44fe7, type: 3}
+  m_PrefabInstance: {fileID: 279781411}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bbcaa605523b0742a6a55034ce76298, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LockpickingGame
 --- !u!1001 &1171507046
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -47548,6 +47591,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 421450, guid: 56f5e89a7be1230409520ccffa3dbbf8, type: 3}
   m_PrefabInstance: {fileID: 1592633437}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1592880296 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 143170, guid: 27b2bb42c14d1c9428d3fd44cc99028a, type: 3}
+  m_PrefabInstance: {fileID: 2020487912}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1598064769
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -48724,6 +48772,22 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 478868, guid: 9d84a7d988251ec4fa19223b92083a24, type: 3}
   m_PrefabInstance: {fileID: 1638303922}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1640780416 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9221103374349531648, guid: f6d2a2863c1d03145a13dd0adef34c1d, type: 3}
+  m_PrefabInstance: {fileID: 490594827}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1640780417 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5740379958036470011, guid: f6d2a2863c1d03145a13dd0adef34c1d, type: 3}
+  m_PrefabInstance: {fileID: 490594827}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1640780416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4960957a90aa08d48871649aced76316, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractTrigger
 --- !u!1001 &1640834185
 PrefabInstance:
   m_ObjectHideFlags: 0

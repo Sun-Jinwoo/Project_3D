@@ -11,6 +11,7 @@ public class InteractTrigger : MonoBehaviour
     private bool jugadorDentro = false;
     private PlayerMovement playerMovement; // Referencia al script de movimiento del player
     private bool accionActivada = false; // Para controlar el estado del toggle
+   public LockpickingGame LokpickingGame; 
 
     void Start()
     {
@@ -45,6 +46,24 @@ public class InteractTrigger : MonoBehaviour
 
     void Update()
     {
+        if (LokpickingGame.gameWon== true && accionActivada== true)
+        {
+            playerMovement.enabled = true;
+
+            objetoAActivar.SetActive(false);
+            gameObject.SetActive(false);
+            promptText.SetActive(false);
+
+         }
+
+
+
+
+
+
+
+        
+
         if (jugadorDentro && Input.GetKeyDown(KeyCode.J))
         {
             accionActivada = !accionActivada; // Toggle el estado
