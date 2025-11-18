@@ -1000,19 +1000,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f036c23fda6b78a4199935fc81d8a225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  topePuntos: 10
-  tiempoAlertaPanel: 5
-  tiempoEscape: 30
-  panelAlerta: {fileID: 1328634581}
-  textoAlerta: {fileID: 1328634580}
-  panelTimer: {fileID: 60753636}
-  textoTimer: {fileID: 584995870}
-  panelVictoria: {fileID: 2137112481}
-  panelGameOver: {fileID: 283987966}
-  zonaSegura: {fileID: 110490460}
-  estadoActual: 0
-  puntosActuales: 0
-  tiempoRestante: 0
 --- !u!4 &444225481 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4827482072336225468, guid: 7ca467a024401084ebcadb58735eed83, type: 3}
@@ -1730,6 +1717,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Large Safe
       objectReference: {fileID: 0}
+    - target: {fileID: 5979047783459813244, guid: cb7b798100ddcde499108b48d3a5a906, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1997,22 +1988,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aaeeef7163afb3b4d8a3af48cf40d5c6, type: 3}
---- !u!114 &1328634580 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5689690852457450662, guid: aaeeef7163afb3b4d8a3af48cf40d5c6, type: 3}
-  m_PrefabInstance: {fileID: 1328634579}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
---- !u!1 &1328634581 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6015706095195151000, guid: aaeeef7163afb3b4d8a3af48cf40d5c6, type: 3}
-  m_PrefabInstance: {fileID: 1328634579}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1388081522
 GameObject:
   m_ObjectHideFlags: 0
@@ -2938,21 +2913,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5422f63cc2c7b2e40b534ae9238f9508, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SeguridadNPC
-  velocidadPatrulla: 2
-  velocidadPersecucion: 5
-  zonasPatrulla: []
-  zonaActual:
-    nombreZona: Zona 1
-    waypoints: []
-  indiceWaypointActual: 0
-  radioDeteccion: 9
-  distanciaAtrapar: 2
-  radioSampleNavMesh: 5
-  panelGameOver: {fileID: 283987966}
-  mostrarLogs: 1
-  agent: {fileID: 0}
-  jugador: {fileID: 0}
-  estadoActual: 0
 --- !u!54 &2120721164
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3215,11 +3175,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aaeeef7163afb3b4d8a3af48cf40d5c6, type: 3}
---- !u!1 &2137112481 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6015706095195151000, guid: aaeeef7163afb3b4d8a3af48cf40d5c6, type: 3}
-  m_PrefabInstance: {fileID: 2137112480}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2145346411 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2581503645864496161, guid: 7ca467a024401084ebcadb58735eed83, type: 3}
@@ -3477,7 +3432,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8402993984826634584, guid: a9133d07a6b6fdb45bc85e1dfc2357ba, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9211759194790013922, guid: a9133d07a6b6fdb45bc85e1dfc2357ba, type: 3}
       propertyPath: m_LocalPosition.x
