@@ -2,28 +2,15 @@
 
 public class CogerObjeto : MonoBehaviour
 {
-    public Transform handPoint; // Cambia a Transform para mayor precisión
+    [Header("Referencias")]
+    public Transform handPoint;
+
     private GameObject pickedObject = null;
-    private Rigidbody pickedRigidbody;
-    private Vector3 velocityOffset; // Para suavizado opcional (interpolación)
+    private ConfigurableJoint joint;
 
-    private void FixedUpdate()
+    private void Update()
     {
-        if (pickedObject != null)
-        {
-            // Posicionar manualmente en FixedUpdate (sincronizado con física)
-            Vector3 targetPosition = handPoint.position;
-            pickedRigidbody.MovePosition(targetPosition);
-            pickedRigidbody.MoveRotation(handPoint.rotation);
-
-            // Opcional: mantener velocidad cero para evitar deriva
-            pickedRigidbody.linearVelocity = Vector3.zero;
-            pickedRigidbody.angularVelocity = Vector3.zero;
-        }
-    }
-
-    void Update()
-    {
+        // Soltar
         if (pickedObject != null && Input.GetKeyDown(KeyCode.Q))
         {
             SoltarObjeto();
@@ -32,7 +19,9 @@ public class CogerObjeto : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("ObjetoAgarrable") && pickedObject == null && Input.GetKeyDown(KeyCode.E))
+        if (pickedObject == null &&
+            other.CompareTag("ObjetoAgarrable") &&
+            Input.GetKeyDown(KeyCode.E))
         {
             AgarrarObjeto(other.gameObject);
         }
@@ -41,40 +30,52 @@ public class CogerObjeto : MonoBehaviour
     private void AgarrarObjeto(GameObject obj)
     {
         pickedObject = obj;
-        pickedRigidbody = obj.GetComponent<Rigidbody>();
+        Rigidbody rb = obj.GetComponent<Rigidbody>();
 
-        // Desactivar gravedad y física
-        pickedRigidbody.useGravity = false;
-        pickedRigidbody.isKinematic = true;
+        // NO hacemos kinematic → mantenemos dinámica pero controlada con joint
+        rb.useGravity = false;
 
-        // Limpiar velocidades residuales
-        pickedRigidbody.linearVelocity = Vector3.zero;
-        pickedRigidbody.angularVelocity = Vector3.zero;
+        // Crear ConfigurableJoint
+        joint = obj.AddComponent<ConfigurableJoint>();
+        joint.connectedBody = GetComponent<Rigidbody>(); // Conectar al jugador
+        joint.anchor = Vector3.zero;
 
-        // NO usar SetParent → evita interferencia física
-        // pickedObject.transform.SetParent(handPoint); // ← ELIMINADO
+        // Configuración del joint para que siga exactamente la mano
+        joint.xMotion = ConfigurableJointMotion.Locked;
+        joint.yMotion = ConfigurableJointMotion.Locked;
+        joint.zMotion = ConfigurableJointMotion.Locked;
+        joint.angularXMotion = ConfigurableJointMotion.Locked;
+        joint.angularYMotion = ConfigurableJointMotion.Locked;
+        joint.angularZMotion = ConfigurableJointMotion.Locked;
 
-        // Posición inicial
-        pickedRigidbody.position = handPoint.position;
-        pickedRigidbody.rotation = handPoint.rotation;
+        // Posicionar inicialmente en la mano
+        obj.transform.position = handPoint.position;
+        obj.transform.rotation = handPoint.rotation;
+
+        // Opcional: conectar visualmente como hijo (solo visual, no afecta física)
+        obj.transform.SetParent(handPoint);
     }
 
     private void SoltarObjeto()
     {
-        if (pickedRigidbody != null)
-        {
-            pickedRigidbody.useGravity = true;
-            pickedRigidbody.isKinematic = false;
+        if (pickedObject == null) return;
 
-            // Opcional: aplicar velocidad del personaje al soltar
-            Rigidbody playerRb = GetComponentInParent<Rigidbody>();
-            if (playerRb != null)
-            {
-                pickedRigidbody.linearVelocity = playerRb.linearVelocity;
-            }
-        }
+        Rigidbody rb = pickedObject.GetComponent<Rigidbody>();
+        rb.useGravity = true;
+
+        // Transferir velocidad del jugador al soltar
+        Rigidbody playerRb = GetComponent<Rigidbody>();
+        if (playerRb != null)
+            rb.linearVelocity = playerRb.linearVelocity;
+
+        // Destruir el joint
+        if (joint != null)
+            Destroy(joint);
+
+        // Quitar parent visual
+        pickedObject.transform.SetParent(null);
 
         pickedObject = null;
-        pickedRigidbody = null;
+        joint = null;
     }
 }

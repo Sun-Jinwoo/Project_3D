@@ -64,7 +64,7 @@ public class LogicaMovimiento : MonoBehaviour
                 anim.SetBool("agachado", true);
                 movementSpeed = velocidadAgachado;
             }
-            else 
+            else
             {
                 anim.SetBool("agachado", false);
                 movementSpeed = velocidadInicial;
@@ -89,3 +89,5 @@ public class LogicaMovimiento : MonoBehaviour
         throw new NotImplementedException();
     }
 }
+
+
