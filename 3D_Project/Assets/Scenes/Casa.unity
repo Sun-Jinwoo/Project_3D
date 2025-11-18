@@ -819,10 +819,10 @@ MonoBehaviour:
   viewAngle: 60
   playerLayer:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   spotLight: {fileID: 676732518}
   normalColor: {r: 0, g: 1, b: 0, a: 1}
   alertColor: {r: 1, g: 0, b: 0, a: 1}
