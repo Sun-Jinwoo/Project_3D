@@ -29,7 +29,7 @@ public class Main_Menu : MonoBehaviour
 
 
     public void PlayGame()
-    {
-        SceneManager.LoadScene("01_Robo_Casa");
-    }
+{
+    SceneTransition.Instance.FadeToScene("01_Robo_Casa");
+}
 }
