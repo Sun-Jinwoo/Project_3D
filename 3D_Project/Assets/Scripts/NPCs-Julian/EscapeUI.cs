@@ -8,7 +8,7 @@ public class EscapeUI : MonoBehaviour
     public GameObject panelEscape;
 
     private float progresoActual = 0f;
-    private float progresoMaximo = 10f; // 10 pulsaciones para llenar
+    private float progresoMaximo = 10f;
     private bool activo = false;
 
     void Start()

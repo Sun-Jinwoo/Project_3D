@@ -24,6 +24,10 @@ public class Rotacion : MonoBehaviour
     public Transform puntoDisparo;
     public float fuerzaDisparo = 20f;
     public float tiempoEntreDisparos = 1.5f;
+    
+    [Header("Sonido")]
+    public AudioSource audioSource;
+    public AudioClip sonidoDisparo;
 
     [Header("Indicador de Estado (colores)")]
     public Renderer indicadorRenderer; // Objeto que cambia de material
@@ -82,12 +86,19 @@ public class Rotacion : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, distanciaDeteccion))
         {
-            if (hit.collider.CompareTag("Player") && !siguiendoJugador)
+            if (hit.collider.CompareTag("Player"))
             {
                 jugadorDetectado = hit.collider.transform;
-                StartCoroutine(SeguirJugador(hit.collider.gameObject));
-                CambiarColor(materialRojo);
-                Debug.DrawRay(ray.origin, ray.direction * distanciaDeteccion, Color.red);
+
+                if (!siguiendoJugador)
+                {
+                    StartCoroutine(SeguirJugador(hit.collider.gameObject));
+                    CambiarColor(materialRojo);
+
+                    // 🔥 DISPARO INMEDIATO
+                    if (tipoRotador == TipoDeRotador.TorretaB)
+                        StartCoroutine(DispararAlJugador());
+                }
             }
         }
         else
@@ -164,6 +175,9 @@ public class Rotacion : MonoBehaviour
         if (tipoRotador == TipoDeRotador.TorretaA && mov != null)
             mov.speed *= 0.5f;
 
+        if (tipoRotador == TipoDeRotador.TorretaA)
+            StartCoroutine(DispararAlJugador());
+
         if (tipoRotador == TipoDeRotador.TorretaB)
             StartCoroutine(DispararAlJugador());
 
@@ -208,6 +222,9 @@ public class Rotacion : MonoBehaviour
             if (proyectilPrefab != null && puntoDisparo != null)
             {
                 GameObject proyectil = Instantiate(proyectilPrefab, puntoDisparo.position, puntoDisparo.rotation);
+                if (audioSource != null && sonidoDisparo != null)
+                    audioSource.PlayOneShot(sonidoDisparo);
+
                 Rigidbody rb = proyectil.GetComponent<Rigidbody>();
                 if (rb != null)
                 {
