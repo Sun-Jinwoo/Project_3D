@@ -8,9 +8,9 @@ public class Proyectil_A : ProjectileBase
     protected override void OnHitPlayer(GameObject player)
     {
         contadorImpactos++;
-        Debug.Log($"Impacto {contadorImpactos}/5");
+        Debug.Log($"Impacto {contadorImpactos}/10");
 
-        if (contadorImpactos >= 5)
+        if (contadorImpactos >= 10)
             SceneManager.LoadScene("GameOver");
     }
 }

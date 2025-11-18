@@ -82,12 +82,19 @@ public class Rotacion : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, distanciaDeteccion))
         {
-            if (hit.collider.CompareTag("Player") && !siguiendoJugador)
+            if (hit.collider.CompareTag("Player"))
             {
                 jugadorDetectado = hit.collider.transform;
-                StartCoroutine(SeguirJugador(hit.collider.gameObject));
-                CambiarColor(materialRojo);
-                Debug.DrawRay(ray.origin, ray.direction * distanciaDeteccion, Color.red);
+
+                if (!siguiendoJugador)
+                {
+                    StartCoroutine(SeguirJugador(hit.collider.gameObject));
+                    CambiarColor(materialRojo);
+
+                    // 🔥 DISPARO INMEDIATO
+                    if (tipoRotador == TipoDeRotador.TorretaB)
+                        StartCoroutine(DispararAlJugador());
+                }
             }
         }
         else
@@ -163,6 +170,9 @@ public class Rotacion : MonoBehaviour
         Movement mov = jugador.GetComponent<Movement>();
         if (tipoRotador == TipoDeRotador.TorretaA && mov != null)
             mov.speed *= 0.5f;
+
+        if (tipoRotador == TipoDeRotador.TorretaA)
+            StartCoroutine(DispararAlJugador());
 
         if (tipoRotador == TipoDeRotador.TorretaB)
             StartCoroutine(DispararAlJugador());
