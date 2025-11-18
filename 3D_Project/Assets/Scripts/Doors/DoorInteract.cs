@@ -4,7 +4,7 @@ public class DoorInteract : MonoBehaviour
 {
     public DoorSensor sensor; // Asigna el sensor principal
     public string playerTag = "Player";
-    public float distanciaInteraccion = 2f;
+    public float distanciaInteraccion = 4f;
 
     private Transform jugador;
 
