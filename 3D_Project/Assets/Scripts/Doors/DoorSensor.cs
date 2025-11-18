@@ -25,18 +25,17 @@ public class DoorSensor : MonoBehaviour
 
     private void ActivarPuertas(Vector3 posicionIntrusion)
     {
-        // Solo se activa la primera vez que el jugador cruza el láser
         if (puertasActivadas) return;
 
         puertasActivadas = true;
 
         foreach (var puerta in puertas)
         {
-            if (puertas != null)
+            if (puerta != null)
                 puerta.BajarPuerta();
         }
 
-        alarma?.ActivarAlarma(posicionIntrusion);
+        alarma?.ActivarAlarma(posicionIntrusion); // ? Aquí los NPCs irán exactamente al punto donde el jugador cruzó el láser
     }
 
     public void DesactivarPuertas()
@@ -49,6 +48,6 @@ public class DoorSensor : MonoBehaviour
                 puerta.SubirPuerta();
         }
 
-        alarma?.DesactivarAlarma();
+        alarma?.DesactivarAlarma(); // Esto desactivará la alarma global aunque se llame varias veces
     }
 }

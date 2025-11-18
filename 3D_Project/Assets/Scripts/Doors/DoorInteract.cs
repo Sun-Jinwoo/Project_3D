@@ -2,30 +2,53 @@ using UnityEngine;
 
 public class DoorInteract : MonoBehaviour
 {
-    public DoorSensor sensor; // Asigna el sensor principal
+    public DoorSensor[] sensores; // Ahora soporta múltiples sensores
     public string playerTag = "Player";
     public float distanciaInteraccion = 4f;
 
     private Transform jugador;
+    private bool yaMostradoPrompt = false;
 
     void Update()
     {
+        // Buscar jugador una sola vez
         if (jugador == null)
         {
             GameObject p = GameObject.FindGameObjectWithTag(playerTag);
             if (p != null) jugador = p.transform;
+            return;
         }
-
-        if (jugador == null) return;
 
         float distancia = Vector3.Distance(transform.position, jugador.position);
 
+        // Mostrar prompt solo cuando esté cerca (opcional, pero mejora UX)
         if (distancia <= distanciaInteraccion)
         {
+            if (!yaMostradoPrompt)
+            {
+                // Aquí puedes poner tu sistema de UI para mostrar "Pulsa E para desactivar alarma"
+                Debug.Log("Pulsa E para desactivar la alarma");
+                yaMostradoPrompt = true;
+            }
+
             if (Input.GetKeyDown(KeyCode.E))
             {
-                sensor.DesactivarPuertas();
+                DesactivarTodo();
             }
+        }
+        else
+        {
+            yaMostradoPrompt = false;
+        }
+    }
+
+    private void DesactivarTodo()
+    {
+        // Desactiva TODOS los sensores asignados (y por tanto la alarma global)
+        foreach (var sensor in sensores)
+        {
+            if (sensor != null)
+                sensor.DesactivarPuertas();
         }
     }
 }
