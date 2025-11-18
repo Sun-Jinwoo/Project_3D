@@ -208,7 +208,7 @@ MonoBehaviour:
   DetectionAngle: 60
   MyLayerMask:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 4294967295
 --- !u!1 &8553181572767048904
 GameObject:
   m_ObjectHideFlags: 0
