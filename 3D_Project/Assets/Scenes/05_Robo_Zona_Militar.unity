@@ -997,43 +997,19 @@ PrefabInstance:
     - {fileID: 8115903626451830383, guid: bf598be00acd29f409e07bd8c057698b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 245918092111566815, guid: bf598be00acd29f409e07bd8c057698b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 26436949}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf598be00acd29f409e07bd8c057698b, type: 3}
 --- !u!4 &26436947 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5886565294388691622, guid: bf598be00acd29f409e07bd8c057698b, type: 3}
   m_PrefabInstance: {fileID: 26436946}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &26436948 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 245918092111566815, guid: bf598be00acd29f409e07bd8c057698b, type: 3}
-  m_PrefabInstance: {fileID: 26436946}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &26436949
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 26436948}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ee9c022f6722f4439ed1f8be02c4887, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AlarmLight
-  alarmaRenderer: {fileID: 975522781}
-  colorBase: {r: 1, g: 1, b: 1, a: 1}
-  colorAlarma: {r: 1, g: 0, b: 0, a: 1}
-  velocidadCambio: 3
 --- !u!114 &26436950 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2798873747282319186, guid: bf598be00acd29f409e07bd8c057698b, type: 3}
   m_PrefabInstance: {fileID: 26436946}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 26436948}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c9dd4353f80036347ab642498653ebc8, type: 3}
@@ -31560,38 +31536,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 562884408}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &810368484 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 245918092111566815, guid: bf598be00acd29f409e07bd8c057698b, type: 3}
-  m_PrefabInstance: {fileID: 8903861958451627716}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &810368485 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5886565294388691622, guid: bf598be00acd29f409e07bd8c057698b, type: 3}
   m_PrefabInstance: {fileID: 8903861958451627716}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &810368490
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 810368484}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ee9c022f6722f4439ed1f8be02c4887, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AlarmLight
-  alarmaRenderer: {fileID: 975522781}
-  colorBase: {r: 1, g: 1, b: 1, a: 1}
-  colorAlarma: {r: 1, g: 0, b: 0, a: 1}
-  velocidadCambio: 3
 --- !u!114 &810368491 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2798873747282319186, guid: bf598be00acd29f409e07bd8c057698b, type: 3}
   m_PrefabInstance: {fileID: 8903861958451627716}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 810368484}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c9dd4353f80036347ab642498653ebc8, type: 3}
@@ -37576,6 +37531,7 @@ GameObject:
   - component: {fileID: 975522782}
   - component: {fileID: 975522781}
   - component: {fileID: 975522780}
+  - component: {fileID: 975522783}
   m_Layer: 0
   m_Name: Alarma
   m_TagString: Untagged
@@ -37592,7 +37548,7 @@ Transform:
   m_GameObject: {fileID: 975522777}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.837002, y: 3.584, z: 2.976}
+  m_LocalPosition: {x: 9.89, y: 3.584, z: 2.976}
   m_LocalScale: {x: 0.23, y: 0.115, z: 0.23}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -37687,6 +37643,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 975522777}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &975522783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 975522777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ee9c022f6722f4439ed1f8be02c4887, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AlarmLight
+  alarmaRenderer: {fileID: 975522781}
+  colorBase: {r: 1, g: 1, b: 1, a: 1}
+  colorAlarma: {r: 1, g: 0, b: 0, a: 1}
+  velocidadCambio: 3
 --- !u!1001 &976090569
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -55161,6 +55133,7 @@ GameObject:
   - component: {fileID: 1482240269}
   - component: {fileID: 1482240268}
   - component: {fileID: 1482240267}
+  - component: {fileID: 1482240274}
   m_Layer: 9
   m_Name: NPC_B1
   m_TagString: Untagged
@@ -55189,6 +55162,8 @@ MonoBehaviour:
   proyectilSeleccionado: {fileID: 6325166028773435222, guid: 5d02d152e2eb6f143908ed352b08a9de, type: 3}
   firePoint: {fileID: 545487920}
   fireRate: 0.8
+  audioSource: {fileID: 1482240274}
+  sonidoDisparo: {fileID: 8300000, guid: 250bc0ddc2a1ccb4bb434d5b5d02b8b6, type: 3}
   waypoints:
   - {fileID: 962959398}
   - {fileID: 769242329}
@@ -55351,6 +55326,103 @@ Transform:
   - {fileID: 384266543}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1482240274
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1482240266}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 40
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1485694851
 GameObject:
   m_ObjectHideFlags: 0
@@ -79167,10 +79239,7 @@ PrefabInstance:
     - {fileID: 8115903626451830383, guid: bf598be00acd29f409e07bd8c057698b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 245918092111566815, guid: bf598be00acd29f409e07bd8c057698b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 810368490}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf598be00acd29f409e07bd8c057698b, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
@@ -79186,5 +79255,5 @@ SceneRoots:
   - {fileID: 357600876}
   - {fileID: 1671231932}
   - {fileID: 1320680428}
-  - {fileID: 1837237593}
   - {fileID: 2042999666}
+  - {fileID: 1837237593}

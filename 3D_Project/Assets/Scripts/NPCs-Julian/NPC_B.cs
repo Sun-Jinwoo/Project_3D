@@ -22,6 +22,10 @@ public class NPC_B : MonoBehaviour
     public float fireRate = 0.8f;
     private bool puedeDisparar = true;
 
+    [Header("Sonido")]
+    public AudioSource audioSource;
+    public AudioClip sonidoDisparo;
+
     [Header("Waypoints de patrulla")]
     public Transform[] waypoints;
     private int currentWaypoint = 0;
@@ -86,9 +90,7 @@ public class NPC_B : MonoBehaviour
         Debug.DrawRay(transform.position + Vector3.up * 0.4f, transform.forward * rangoCorto, Color.red);
     }
 
-    // -------------------------------------------------------------
-    // ------------------------ DETECCIÓN ---------------------------
-    // -------------------------------------------------------------
+    // ------------------------------------------- DETECCIÓN --------------------------------------------------
     void DetectarJugador()
     {
         if (jugador == null)
@@ -136,7 +138,7 @@ public class NPC_B : MonoBehaviour
     }
 
 
-    // NUEVO – Detección por SphereCollider (proximidad directa)
+    // Detección por SphereCollider 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(playerTag))
@@ -147,9 +149,7 @@ public class NPC_B : MonoBehaviour
     }
 
 
-    // -------------------------------------------------------------
-    // ------------------------- GAME OVER --------------------------
-    // -------------------------------------------------------------
+    // ------------------------------------------------------ GAME OVER -------------------------------------------
     void VerificarGameOver()
     {
         if (jugador == null) return;
@@ -172,9 +172,7 @@ public class NPC_B : MonoBehaviour
     }
 
 
-    // -------------------------------------------------------------
-    // ---------------------- PATRULLA -----------------------------
-    // -------------------------------------------------------------
+    // ----------------------------------------------------- PATRULLA --------------------------------------------------
     void Patrullar()
     {
         CambiarColor(materialNormal);
@@ -189,9 +187,7 @@ public class NPC_B : MonoBehaviour
     }
 
 
-    // -------------------------------------------------------------
-    // ---------------------- SOSPECHA -----------------------------
-    // -------------------------------------------------------------
+    // -------------------------------------------------- SOSPECHA --------------------------------------------------------
     void ModoSospecha()
     {
         CambiarColor(materialSospecha);
@@ -207,9 +203,7 @@ public class NPC_B : MonoBehaviour
     }
 
 
-    // -------------------------------------------------------------
-    // --------------------- ACERCAMIENTO --------------------------
-    // -------------------------------------------------------------
+    // --------------------------------------------------- ACERCAMIENTO --------------------------------------------------
     void ModoAcercamiento()
     {
         CambiarColor(materialBusqueda);
@@ -225,10 +219,7 @@ public class NPC_B : MonoBehaviour
             CambiarEstado(EstadoNPC.Disparo);
     }
 
-
-    // -------------------------------------------------------------
-    // ----------------------- DISPARO ------------------------------
-    // -------------------------------------------------------------
+    // --------------------------------------------------- DISPARO ---------------------------------------------------------
     void ModoDisparo()
     {
         if (jugador == null) return;
@@ -259,6 +250,9 @@ public class NPC_B : MonoBehaviour
         if (proyectilSeleccionado != null && firePoint != null)
         {
             GameObject proyectil = Instantiate(proyectilSeleccionado, firePoint.position, firePoint.rotation);
+            if (audioSource != null && sonidoDisparo != null)
+                audioSource.PlayOneShot(sonidoDisparo);
+
             Rigidbody rb = proyectil.GetComponent<Rigidbody>();
 
             if (rb != null)
@@ -270,9 +264,7 @@ public class NPC_B : MonoBehaviour
     }
 
 
-    // -------------------------------------------------------------
-    // --------------------- CAMBIO DE ESTADO ----------------------
-    // -------------------------------------------------------------
+    // ------------------------------------------------------- CAMBIO DE ESTADO --------------------------------------------
     void CambiarEstado(EstadoNPC nuevoEstado)
     {
         if (estadoActual == nuevoEstado) return;
