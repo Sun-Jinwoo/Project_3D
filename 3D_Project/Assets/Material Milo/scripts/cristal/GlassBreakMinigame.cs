@@ -12,9 +12,10 @@ public class GlassBreakMinigame : MonoBehaviour
     [SerializeField] private float regressSpeed = 0.2f; // Velocidad de disminución del progreso
     [SerializeField] private float barMinX; // Límite izquierdo de la barra estática
     [SerializeField] private float barMaxX; // Límite derecho de la barra estática
+    public GameObject puetaRota;//puerta que se activa al ganar el minijuego
 
     private float progress = 0f;
-    private bool isGameOver = false;
+    public bool isGameOver = false;
     private float targetX; // Posición objetivo para la zona de éxito
     private float timeSinceLastTarget = 0f;
     private float changeTargetInterval = 1f; // Intervalo para cambiar el objetivo aleatorio
@@ -63,8 +64,8 @@ public class GlassBreakMinigame : MonoBehaviour
         if (progress >= 1f)
         {
             isGameOver = true;
-            Debug.Log("¡Cristal roto! Ganaste.");
-            // Aquí puedes activar animación de cristal roto, sonido, etc.
+            puetaRota.transform.Rotate(0, 90, 0); // Abrir la puerta girándola 90 grados    
+            Debug.Log("¡Cristal roto! Ganaste.");//este se usa para saber si el minijuego se gano
         }
     }
 

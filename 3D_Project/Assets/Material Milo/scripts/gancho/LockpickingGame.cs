@@ -10,10 +10,11 @@ public class LockpickingGame : MonoBehaviour
     public Button resetButton; // Botón de reinicio
 
     private bool[] pinStates; // Estado de los pines (false = abajo, true = arriba)
-    private int[] correctOrder = { 2, 0, 4, 1, 3 }; // Orden correcto (0-based: pin 3, 1, 5, 2, 4)
+    public int[] correctOrder = { 0, 1, 2, 3, 4 }; // Orden correcto (0-based: pin 3, 1, 5, 2, 4)
     private int currentStep; // Paso actual en el orden correcto
     public bool gameWon; // Indica si el juego está ganado
     public GameObject puerta; // puerta que se va a abrir
+    public GameObject puerta2; // puerta que se va a abrir
 
     void Start()
     {
@@ -49,6 +50,7 @@ public class LockpickingGame : MonoBehaviour
                 statusText.text = "¡Cerradura desbloqueada! ¡Ganaste!";
                 statusText.color = Color.green;
                 puerta.transform.Rotate(0, 90, 0); // Abrir la puerta girándola 90 grados
+                puerta2.transform.Rotate(0, 90, 0); // Abrir la puerta girándola 90 grados
 
             }
             UpdatePins();
