@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
 
     public TextMeshProUGUI TimerTMP;
     public GameObject GameOverPanel;
-
+    public GameObject panelGameOver;
     public bool GameOver { get; set; }
     public bool Vault { get; set; }
 
@@ -52,4 +52,23 @@ public class GameManager : MonoBehaviour
     {
         tiempoFinal = Time.time - tiempoInicio;
     }
+
+    public void MostrarGameOver()
+{
+    Time.timeScale = 0f;
+    panelGameOver.SetActive(true);
+}
+
+public void Reintentar()
+{
+    Time.timeScale = 1f;
+    UnityEngine.SceneManagement.SceneManager.LoadScene(
+        UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+}
+
+public void Salir()
+{
+    Time.timeScale = 1f;
+    UnityEngine.SceneManagement.SceneManager.LoadScene("00_Menu");
+}
 }

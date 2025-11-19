@@ -6,6 +6,11 @@ public class CasaLuz : MonoBehaviour
 
     public bool encendida;
 
+    void Start()
+{
+    luz.enabled = false;
+}
+
     public void Toggle()
     {
         encendida = !encendida;
