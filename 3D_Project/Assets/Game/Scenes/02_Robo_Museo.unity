@@ -1905,7 +1905,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Interactive_Object
   amplitud: 0.1
   velocidad: 2
-  textoContador: {fileID: 0}
 --- !u!1001 &143292527
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4612,7 +4611,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Interactive_Object
   amplitud: 0.1
   velocidad: 2
-  textoContador: {fileID: 0}
 --- !u!1001 &376712728
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6455,7 +6453,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.RawImage
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.49803922}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -7569,7 +7567,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Interactive_Object
   amplitud: 0.1
   velocidad: 2
-  textoContador: {fileID: 0}
 --- !u!1001 &661240258
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8804,7 +8801,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Interactive_Object
   amplitud: 0.1
   velocidad: 2
-  textoContador: {fileID: 0}
 --- !u!1001 &778496225
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9338,7 +9334,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Interactive_Object
   amplitud: 0.1
   velocidad: 2
-  textoContador: {fileID: 0}
 --- !u!1001 &813286306
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15832,6 +15827,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Personaje
       objectReference: {fileID: 0}
+    - target: {fileID: 1540496082575134671, guid: cd3d8d81aa173a143846113162c18c7c, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 2173868263081366901, guid: cd3d8d81aa173a143846113162c18c7c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 30.71614
@@ -15871,6 +15870,10 @@ PrefabInstance:
     - target: {fileID: 2173868263081366901, guid: cd3d8d81aa173a143846113162c18c7c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4086856027981231379, guid: cd3d8d81aa173a143846113162c18c7c, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 5245301027632582415, guid: cd3d8d81aa173a143846113162c18c7c, type: 3}
       propertyPath: m_Controller
@@ -17030,7 +17033,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Interactive_Object
   amplitud: 0.1
   velocidad: 2
-  textoContador: {fileID: 0}
 --- !u!1001 &1401564130
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18454,7 +18456,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Interactive_Object
   amplitud: 0.1
   velocidad: 2
-  textoContador: {fileID: 0}
 --- !u!4 &1504612930 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 417118, guid: e979c8f656be0fd4d844f3467a72c3ec, type: 3}
@@ -20119,7 +20120,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Interactive_Object
   amplitud: 0.1
   velocidad: 2
-  textoContador: {fileID: 0}
 --- !u!4 &1679706855 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 422978, guid: 6d2a6859c7ef77f4daca729eb9d2633e, type: 3}
@@ -23254,7 +23254,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Interactive_Object
   amplitud: 0.1
   velocidad: 2
-  textoContador: {fileID: 0}
 --- !u!1001 &1958831389
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23954,7 +23953,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Interactive_Object
   amplitud: 0.1
   velocidad: 2
-  textoContador: {fileID: 0}
 --- !u!1001 &2029554416
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23966,6 +23964,10 @@ PrefabInstance:
     - target: {fileID: 190380, guid: a4a654ab168fbb543bd6ca2c6b966a38, type: 3}
       propertyPath: m_Name
       value: SM_Prop_GoldBar_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 190380, guid: a4a654ab168fbb543bd6ca2c6b966a38, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 417422, guid: a4a654ab168fbb543bd6ca2c6b966a38, type: 3}
       propertyPath: m_LocalScale.x
