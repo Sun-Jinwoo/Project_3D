@@ -2,20 +2,31 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD:3D_Project/Assets/TextMesh Pro/Examples & Extras/Materials/Ground - Surface Shader Scene.mat
   m_Name: Ground - Surface Shader Scene
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _EMISSION
+=======
+  m_Name: Epic_BlueSunset
+  m_Shader: {fileID: 104, guid: 0000000000000000f000000000000000, type: 0}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords:
+  - _EMISSION
+>>>>>>> origin/Julian-Sanchez-3.1:3D_Project/Assets/Assets_Shop/Cliff Mansion/Skies/Epic_BlueSunset.mat
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -71,6 +82,18 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+<<<<<<< HEAD:3D_Project/Assets/TextMesh Pro/Examples & Extras/Materials/Ground - Surface Shader Scene.mat
+=======
+    - _RightTex:
+        m_Texture: {fileID: 2800000, guid: 04869052f46ba428caebe862513e3b5d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _UpTex:
+        m_Texture: {fileID: 2800000, guid: 912bf47cb4f5f4c6ea43b7a8bd2eb0e5, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+>>>>>>> origin/Julian-Sanchez-3.1:3D_Project/Assets/Assets_Shop/Cliff Mansion/Skies/Epic_BlueSunset.mat
     m_Floats:
     - _Border: 0.021428574
     - _BumpScale: 0.25
@@ -79,9 +102,13 @@ Material:
     - _DetailNormalMapScale: 1
     - _DiffusePower: 1
     - _DstBlend: 0
+<<<<<<< HEAD:3D_Project/Assets/TextMesh Pro/Examples & Extras/Materials/Ground - Surface Shader Scene.mat
     - _EdgeSoftness: 0
     - _EdgeWidth: 0
     - _EmissionScaleUI: 0
+=======
+    - _Exposure: 0.51
+>>>>>>> origin/Julian-Sanchez-3.1:3D_Project/Assets/Assets_Shop/Cliff Mansion/Skies/Epic_BlueSunset.mat
     - _GlossMapScale: 1
     - _Glossiness: 0.348
     - _GlossyReflections: 1
@@ -89,9 +116,13 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+<<<<<<< HEAD:3D_Project/Assets/TextMesh Pro/Examples & Extras/Materials/Ground - Surface Shader Scene.mat
     - _Radius: 0
     - _Shininess: 0.24302611
     - _Size: 0.1
+=======
+    - _Rotation: 0
+>>>>>>> origin/Julian-Sanchez-3.1:3D_Project/Assets/Assets_Shop/Cliff Mansion/Skies/Epic_BlueSunset.mat
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -104,9 +135,17 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
+<<<<<<< HEAD:3D_Project/Assets/TextMesh Pro/Examples & Extras/Materials/Ground - Surface Shader Scene.mat
     - _BorderColor: {r: 0, g: 0, b: 0, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 0.8784314}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColorUI: {r: 1, g: 1, b: 1, a: 1}
     - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+=======
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Tint: {r: 0.8679245, g: 0.6749696, b: 0.47899607, a: 0.5}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
+>>>>>>> origin/Julian-Sanchez-3.1:3D_Project/Assets/Assets_Shop/Cliff Mansion/Skies/Epic_BlueSunset.mat
