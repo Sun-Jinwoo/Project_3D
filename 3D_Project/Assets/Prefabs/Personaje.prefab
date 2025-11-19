@@ -349,12 +349,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e45bb39a8b1591499d6c459b41e24d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LogicaMovimiento
-  movementSpeed: 5
+  movementSpeed: 1
   rotationSpeed: 200
   x: 0
   y: 0
   rb: {fileID: 4670521151248028040}
-  fuerzaDeSalto: 8
+  fuerzaDeSalto: 1
   puedoSaltar: 0
   velocidadInicial: 0
   velocidadAgachado: 0
