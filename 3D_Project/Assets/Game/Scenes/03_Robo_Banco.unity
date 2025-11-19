@@ -1900,11 +1900,14 @@ Transform:
   m_PrefabInstance: {fileID: 54819459}
   m_PrefabAsset: {fileID: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- !u!4 &56632400 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 470596, guid: 8fd8f3f29fdf6cf4c9c7e1dd047bc74c, type: 3}
   m_PrefabInstance: {fileID: 651919517}
   m_PrefabAsset: {fileID: 0}
+=======
+>>>>>>> parent of 996db7b (nivel casi terminado faltan los npc)
 =======
 >>>>>>> parent of 996db7b (nivel casi terminado faltan los npc)
 --- !u!1001 &56770333
@@ -25400,6 +25403,7 @@ Transform:
   m_PrefabInstance: {fileID: 877476177}
   m_PrefabAsset: {fileID: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- !u!1001 &877643838
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25477,6 +25481,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6d2a2863c1d03145a13dd0adef34c1d, type: 3}
+=======
+>>>>>>> parent of 996db7b (nivel casi terminado faltan los npc)
 =======
 >>>>>>> parent of 996db7b (nivel casi terminado faltan los npc)
 --- !u!1001 &877708002
@@ -28006,6 +28012,7 @@ Transform:
   m_PrefabInstance: {fileID: 983299112}
   m_PrefabAsset: {fileID: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- !u!1001 &985145934
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28060,6 +28067,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 476350, guid: c413258f59cccc14d83ab0a327fcbc1e, type: 3}
   m_PrefabInstance: {fileID: 985145934}
   m_PrefabAsset: {fileID: 0}
+=======
+>>>>>>> parent of 996db7b (nivel casi terminado faltan los npc)
 =======
 >>>>>>> parent of 996db7b (nivel casi terminado faltan los npc)
 --- !u!1001 &988994811
@@ -59337,6 +59346,9 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 70262196587572958, guid: f4d8074ce0c2ae4448bd95efefd0004b, type: 3}
   m_PrefabInstance: {fileID: 1988689856}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
+>>>>>>> parent of 996db7b (nivel casi terminado faltan los npc)
+=======
 >>>>>>> parent of 996db7b (nivel casi terminado faltan los npc)
 --- !u!1001 &1990553267
 PrefabInstance:
@@ -62857,6 +62869,7 @@ Transform:
   m_PrefabInstance: {fileID: 2104729853}
   m_PrefabAsset: {fileID: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- !u!1 &2105781529
 GameObject:
   m_ObjectHideFlags: 0
@@ -62990,6 +63003,8 @@ Transform:
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 =======
+=======
+>>>>>>> parent of 996db7b (nivel casi terminado faltan los npc)
 --- !u!1001 &2106236989
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -64312,6 +64327,7 @@ Transform:
   m_PrefabInstance: {fileID: 2145954612}
   m_PrefabAsset: {fileID: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- !u!1001 &2074792261524797856
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -64885,6 +64901,8 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: be337872b96ee3040ae722d88652eb90, type: 3}
 =======
 >>>>>>> parent of 996db7b (nivel casi terminado faltan los npc)
+=======
+>>>>>>> parent of 996db7b (nivel casi terminado faltan los npc)
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -64892,6 +64910,7 @@ SceneRoots:
   - {fileID: 1338210715}
   - {fileID: 2048457357}
   - {fileID: 622126551}
+<<<<<<< HEAD
 <<<<<<< HEAD
   - {fileID: 6358576326029475240}
   - {fileID: 292609402}
@@ -64913,6 +64932,18 @@ SceneRoots:
   - {fileID: 383568348}
   - {fileID: 1784256565}
   - {fileID: 121903741}
+=======
+  - {fileID: 1478424125}
+  - {fileID: 2106236989}
+  - {fileID: 1986315276}
+  - {fileID: 490594827}
+  - {fileID: 292609402}
+  - {fileID: 279781411}
+  - {fileID: 2020487912}
+  - {fileID: 1520437277}
+  - {fileID: 1106642821}
+  - {fileID: 1988689856}
+>>>>>>> parent of 996db7b (nivel casi terminado faltan los npc)
 =======
   - {fileID: 1478424125}
   - {fileID: 2106236989}
