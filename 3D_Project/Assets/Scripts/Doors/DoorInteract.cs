@@ -26,7 +26,7 @@ public class DoorInteract : MonoBehaviour
         {
             if (!yaMostradoPrompt)
             {
-                // Aquí puedes poner tu sistema de UI para mostrar "Pulsa E para desactivar alarma"
+                // Podemos colocar aqui una UI para que indique que al presionar "E" se desactivan las puertas
                 Debug.Log("Pulsa E para desactivar la alarma");
                 yaMostradoPrompt = true;
             }
@@ -44,7 +44,7 @@ public class DoorInteract : MonoBehaviour
 
     private void DesactivarTodo()
     {
-        // Desactiva TODOS los sensores asignados (y por tanto la alarma global)
+        // Desactiva TODOS los sensores asignados (y la alarma global)
         foreach (var sensor in sensores)
         {
             if (sensor != null)

@@ -22,7 +22,11 @@ public class NPC_B : MonoBehaviour
     public float fireRate = 0.8f;
     private bool puedeDisparar = true;
 
-    [Header("Waypoints de patrulla")]
+    [Header("Sonido")]
+    public AudioSource audioSource;
+    public AudioClip sonidoDisparo;
+
+    [Header("Waypoints de patrulla (Emptys)")]
     public Transform[] waypoints;
     private int currentWaypoint = 0;
 
@@ -48,19 +52,22 @@ public class NPC_B : MonoBehaviour
     private SphereCollider triggerDeteccion;
     public float SphereSize = 0.7f;
 
+    private Animator animator;
+
+
 
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>(); //Animador
+
         CambiarColor(materialNormal);
 
-        // SphereCollider 
         triggerDeteccion = gameObject.AddComponent<SphereCollider>();
         triggerDeteccion.isTrigger = true;
-        triggerDeteccion.radius = rangoCorto * SphereSize; // configurable si quieres
+        triggerDeteccion.radius = rangoCorto * SphereSize;
         triggerDeteccion.center = Vector3.zero;
 
-        // Mover entre waypoints
         if (waypoints.Length > 0)
         {
             currentWaypoint = 0;
@@ -68,11 +75,11 @@ public class NPC_B : MonoBehaviour
         }
     }
 
-
     private void Update()
     {
         DetectarJugador();
         VerificarGameOver();
+        UpdateAnimation(); // Tambien parte del animador
 
         switch (estadoActual)
         {
@@ -86,9 +93,29 @@ public class NPC_B : MonoBehaviour
         Debug.DrawRay(transform.position + Vector3.up * 0.4f, transform.forward * rangoCorto, Color.red);
     }
 
-    // -------------------------------------------------------------
-    // ------------------------ DETECCIÓN ---------------------------
-    // -------------------------------------------------------------
+    // Animator controller
+    private void UpdateAnimation()
+    {
+        if (animator == null) return;
+
+        int animState = 0; // 0 = Idle (quieto), 1 = Caminar (patrulla), 2 = Correr (búsqueda/persecución), 3 = Disparar
+
+        if (estadoActual == EstadoNPC.Disparo)
+        {
+            animState = 3; // Disparar
+        }
+        else if (agent.velocity.magnitude > 0.2f) // Está moviéndose
+        {
+            if (estadoActual == EstadoNPC.Patrulla)
+                animState = 1; // Caminar
+            else
+                animState = 2; // Correr (sospecha o acercamiento)
+        }
+        // Si no se mueve → Idle (quieto)
+
+        animator.SetInteger("AnimState", animState);
+    }
+
     void DetectarJugador()
     {
         if (jugador == null)
@@ -135,8 +162,6 @@ public class NPC_B : MonoBehaviour
         ultimaPosicionVista = punto;
     }
 
-
-    // NUEVO – Detección por SphereCollider (proximidad directa)
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(playerTag))
@@ -146,10 +171,6 @@ public class NPC_B : MonoBehaviour
         }
     }
 
-
-    // -------------------------------------------------------------
-    // ------------------------- GAME OVER --------------------------
-    // -------------------------------------------------------------
     void VerificarGameOver()
     {
         if (jugador == null) return;
@@ -162,7 +183,7 @@ public class NPC_B : MonoBehaviour
 
             if (tiempoCercaDelJugador >= tiempoParaGameOver)
             {
-                SceneManager.LoadScene("GameOver"); // Reemplaza por tu escena
+                SceneManager.LoadScene("GameOver");
             }
         }
         else
@@ -171,10 +192,6 @@ public class NPC_B : MonoBehaviour
         }
     }
 
-
-    // -------------------------------------------------------------
-    // ---------------------- PATRULLA -----------------------------
-    // -------------------------------------------------------------
     void Patrullar()
     {
         CambiarColor(materialNormal);
@@ -188,17 +205,14 @@ public class NPC_B : MonoBehaviour
         }
     }
 
-
-    // -------------------------------------------------------------
-    // ---------------------- SOSPECHA -----------------------------
-    // -------------------------------------------------------------
     void ModoSospecha()
     {
         CambiarColor(materialSospecha);
         agent.isStopped = false;
-        agent.speed = velocidad * 0.8f;
+        agent.speed = velocidad; // ← Para que corra en modo busqueda tambien
         agent.destination = ultimaPosicionVista;
 
+        // Rotación de búsqueda 
         transform.Rotate(Vector3.up * Mathf.Sin(Time.time * 2f) * 40f * Time.deltaTime);
 
         tiempoSinVer += Time.deltaTime;
@@ -206,10 +220,6 @@ public class NPC_B : MonoBehaviour
             CambiarEstado(EstadoNPC.Patrulla);
     }
 
-
-    // -------------------------------------------------------------
-    // --------------------- ACERCAMIENTO --------------------------
-    // -------------------------------------------------------------
     void ModoAcercamiento()
     {
         CambiarColor(materialBusqueda);
@@ -225,10 +235,6 @@ public class NPC_B : MonoBehaviour
             CambiarEstado(EstadoNPC.Disparo);
     }
 
-
-    // -------------------------------------------------------------
-    // ----------------------- DISPARO ------------------------------
-    // -------------------------------------------------------------
     void ModoDisparo()
     {
         if (jugador == null) return;
@@ -236,7 +242,6 @@ public class NPC_B : MonoBehaviour
         CambiarColor(materialDisparo);
         agent.isStopped = true;
 
-        // Apuntar al jugador sin inclinar el NPC
         Vector3 mirar = new Vector3(jugador.position.x, transform.position.y, jugador.position.z);
         transform.LookAt(mirar);
 
@@ -259,20 +264,21 @@ public class NPC_B : MonoBehaviour
         if (proyectilSeleccionado != null && firePoint != null)
         {
             GameObject proyectil = Instantiate(proyectilSeleccionado, firePoint.position, firePoint.rotation);
+            if (audioSource != null && sonidoDisparo != null)
+                audioSource.PlayOneShot(sonidoDisparo);
             Rigidbody rb = proyectil.GetComponent<Rigidbody>();
 
             if (rb != null)
                 rb.linearVelocity = firePoint.forward * 25f;
+
+            // Animacion de disparo
+            animator?.SetTrigger("Fire");
         }
 
         yield return new WaitForSeconds(fireRate);
         puedeDisparar = true;
     }
 
-
-    // -------------------------------------------------------------
-    // --------------------- CAMBIO DE ESTADO ----------------------
-    // -------------------------------------------------------------
     void CambiarEstado(EstadoNPC nuevoEstado)
     {
         if (estadoActual == nuevoEstado) return;
@@ -280,7 +286,6 @@ public class NPC_B : MonoBehaviour
         estadoActual = nuevoEstado;
         tiempoSinVer = 0f;
     }
-
 
     void CambiarColor(Material mat)
     {
