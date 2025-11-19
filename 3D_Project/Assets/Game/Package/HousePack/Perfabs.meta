@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:3D_Project/Assets/Game/Package/HousePack/Perfabs.meta
 guid: 275bda8489b55f742a7a38b42bc05b17
+=======
+guid: 497b1625d3056584ea470f923eaf9924
+>>>>>>> origin/JoJo:3D_Project/Assets/Package/HousePack/Perfabs.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:3D_Project/Assets/Game/Package/HousePack/Scene/SimpleSettings.lighting.meta
 guid: 986feefb6383f7f44a4966c9af4b1dbe
+=======
+guid: 7f1ad1a4d62bf754b89649985a556884
+>>>>>>> origin/JoJo:3D_Project/Assets/Package/HousePack/Scene/SimpleSettings.lighting.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 0

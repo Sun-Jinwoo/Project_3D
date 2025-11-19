@@ -3,20 +3,26 @@
 --- !u!78 &1
 TagManager:
 <<<<<<< HEAD
+<<<<<<< HEAD
   serializedVersion: 2
   tags: []
 =======
+=======
+>>>>>>> origin/JoJo
   serializedVersion: 3
   tags:
   - ObjetoAgarrable
   - Ground
   - DeathZone
+<<<<<<< HEAD
 >>>>>>> origin/Julian-Sanchez-3.1
+=======
+>>>>>>> origin/JoJo
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - Obstacles
@@ -58,27 +64,3 @@ TagManager:
   - Light Layer 5
   - Light Layer 6
   - Light Layer 7
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 

@@ -281,6 +281,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0a5020790d25c084c8f32a69872c3a80, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7367823601863447513}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0a5020790d25c084c8f32a69872c3a80, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -6488369589011577541}
   m_SourcePrefab: {fileID: 100100000, guid: 0a5020790d25c084c8f32a69872c3a80, type: 3}
 --- !u!1 &1540496082575134671 stripped
 GameObject:
@@ -349,15 +352,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e45bb39a8b1591499d6c459b41e24d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LogicaMovimiento
-  movementSpeed: 5
+  movementSpeed: 1
   rotationSpeed: 200
   x: 0
   y: 0
   rb: {fileID: 4670521151248028040}
-  fuerzaDeSalto: 8
+  fuerzaDeSalto: 1
   puedoSaltar: 0
   velocidadInicial: 0
   velocidadAgachado: 0
+--- !u!114 &-6488369589011577541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1540496082575134671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31a8448302980184fbab27f41f4c0630, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteraccionJugador
+  cam: {fileID: 0}
+  interactDistance: 2
 --- !u!4 &2173868263081366901 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0a5020790d25c084c8f32a69872c3a80, type: 3}

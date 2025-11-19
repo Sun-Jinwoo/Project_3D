@@ -18,9 +18,17 @@ public class Security : MonoBehaviour
     public float DetectionAngle = 30f;
     public LayerMask MyLayerMask;
 
+    public float tiempoDespertar = 5f;
+    bool despertarActivado = false;
+    float tiempoActual;
+    public bool npcDespierto = false;
+
+    
     Rigidbody myRigidbody;
     bool detectedPlayer;
     bool movingTowardsPatrolStart;
+
+    TimerManager timer;
 
     private void Awake()
     {
@@ -33,7 +41,24 @@ public class Security : MonoBehaviour
         {
             transform.position = PatrolStart.position;
         }
+
+        timer = Object.FindFirstObjectByType<TimerManager>();
     }
+
+    public void IniciarDespertar()
+{
+    if (!despertarActivado && !npcDespierto)
+    {
+        despertarActivado = true;
+        tiempoActual = tiempoDespertar;
+    }
+}
+
+public void DespertarAnticipado()
+{
+    npcDespierto = true;
+    despertarActivado = false;
+}
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -70,33 +95,61 @@ public class Security : MonoBehaviour
         {
             ViewSpriteRenderer.color = NotDetectedColor;
         }
+
+        if (despertarActivado && !npcDespierto)
+{
+    tiempoActual -= Time.deltaTime;
+
+    if (tiempoActual <= 0)
+    {
+        npcDespierto = true;
+        despertarActivado = false;
     }
+}
+
+if (!npcDespierto)
+{
+    return;
+}
+    }
+
 
     private void FixedUpdate()
     {
         if (!GameManager.Instance.GameOver)
         {
+            if (!npcDespierto)
+    return;
+
+
             detectedPlayer = false;
+
+            // deteccion del jugador
             if (Vector3.Distance(transform.position, Ninja.Instance.transform.position) <= DetectionRadius)
             {
                 Vector3 positionDelta = Ninja.Instance.transform.position - transform.position;
+
                 if (Vector3.Angle(Model.forward, positionDelta) <= DetectionAngle * 0.5f)
                 {
                     if (!Physics.Raycast(Head.position, positionDelta, positionDelta.magnitude, MyLayerMask))
                     {
                         detectedPlayer = true;
+
+                        // activar temporizador al detectar jugador
+                        timer?.ActivarTemporizador();
                     }
                 }
             }
 
+            // si detecta jugador, lo persigue
             if (detectedPlayer)
             {
-                // Move towards player
                 Move(Ninja.Instance.transform.position, MoveSpeed);
             }
+
+            // patrulla entre dos puntos
             else if (PatrolStart && PatrolEnd)
             {
-                // Move towards patrol point
                 if (movingTowardsPatrolStart)
                 {
                     if (Move(PatrolStart.position, PatrolSpeed))
@@ -119,9 +172,12 @@ public class Security : MonoBehaviour
     {
         Vector3 moveDirection = pos - transform.position;
         moveDirection.Normalize();
+
         myRigidbody.MovePosition(Vector3.MoveTowards(transform.position, pos, speed * Time.deltaTime));
+
         Vector3 lookDirection = moveDirection;
         lookDirection.y = 0f;
+
         if (lookDirection != Vector3.zero)
         {
             Model.rotation = Quaternion.Lerp(Model.rotation, Quaternion.LookRotation(lookDirection), Time.deltaTime * TurnSmoothing);

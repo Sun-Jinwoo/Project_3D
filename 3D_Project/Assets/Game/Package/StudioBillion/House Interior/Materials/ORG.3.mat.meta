@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:3D_Project/Assets/Game/Package/StudioBillion/House Interior/Materials/ORG.3.mat.meta
 guid: cd71edddba528844d8d0d27fd8cc91c1
+=======
+guid: 6ecf879f18a51a849b5ff7bb6d6d845b
+>>>>>>> origin/JoJo:3D_Project/Assets/Package/StudioBillion/House Interior/Materials/ORG.3.mat.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 0

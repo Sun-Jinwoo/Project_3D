@@ -1,5 +1,16 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:3D_Project/Assets/Objetos 3D/Soldado/Firing Rifle.fbx.meta
 guid: a72c09f8cea2b5c44a3c4d60bd7f60d8
+========
+guid: e0147f4678533444ca8209554a9ead22
+AssetOrigin:
+  serializedVersion: 1
+  productId: 236466
+  packageName: Modular House Pack 1
+  packageVersion: 1.0
+  assetPath: Assets/ModularHousePack1/Art/Meshs/Models.fbx
+  uploadId: 547248
+>>>>>>>> origin/JoJo:3D_Project/Assets/Game/ModularHousePack1/Art/Meshs/Models.fbx.meta
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -14,7 +25,7 @@ ModelImporter:
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
-    removeConstantScaleCurves: 0
+    removeConstantScaleCurves: 1
     motionNodeName: 
     animationImportErrors: 
     animationImportWarnings: 
@@ -41,8 +52,13 @@ ModelImporter:
     importPhysicalCameras: 1
     importVisibility: 1
     importBlendShapes: 1
+<<<<<<<< HEAD:3D_Project/Assets/Objetos 3D/Soldado/Firing Rifle.fbx.meta
     importCameras: 1
     importLights: 1
+========
+    importCameras: 0
+    importLights: 0
+>>>>>>>> origin/JoJo:3D_Project/Assets/Game/ModularHousePack1/Art/Meshs/Models.fbx.meta
     nodeNameCollisionStrategy: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
@@ -102,7 +118,11 @@ ModelImporter:
   humanoidOversampling: 1
   avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+<<<<<<<< HEAD:3D_Project/Assets/Objetos 3D/Soldado/Firing Rifle.fbx.meta
   importBlendShapeDeformPercent: 1
+========
+  importBlendShapeDeformPercent: 0
+>>>>>>>> origin/JoJo:3D_Project/Assets/Game/ModularHousePack1/Art/Meshs/Models.fbx.meta
   remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
   userData: 

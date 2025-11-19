@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:3D_Project/Assets/Game/Package/BOXOPHOBIC.meta
 guid: 7e7cec0da65bd6e4badcdcfa40d30d07
+=======
+guid: 98c7cc26d67fe63468192475c0926411
+>>>>>>> origin/JoJo:3D_Project/Assets/Package/BOXOPHOBIC.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

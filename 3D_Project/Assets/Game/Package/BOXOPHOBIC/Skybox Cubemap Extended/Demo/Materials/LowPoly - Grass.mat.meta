@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:3D_Project/Assets/Game/Package/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Materials/LowPoly - Grass.mat.meta
 guid: cc6fefbd0412bc44f9cd9eafb1b37f52
+=======
+guid: ff8855d6987e15f4299e334c45340f61
+>>>>>>> origin/JoJo:3D_Project/Assets/Package/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Materials/LowPoly - Grass.mat.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 0

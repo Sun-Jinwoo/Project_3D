@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:3D_Project/Assets/Game/Package/HousePack/Scene/Materials/Grid.mat.meta
 guid: 3363c072136ce8a42a48876398c3e9c4
+=======
+guid: b211a080ab44d8049b3e237c25e566bf
+>>>>>>> origin/JoJo:3D_Project/Assets/Package/HousePack/Scene/Materials/Grid.mat.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 0

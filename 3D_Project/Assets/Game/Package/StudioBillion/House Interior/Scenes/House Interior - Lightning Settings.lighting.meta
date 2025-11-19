@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:3D_Project/Assets/Game/Package/StudioBillion/House Interior/Scenes/House Interior - Lightning Settings.lighting.meta
 guid: b87caa2766d521d4580c733746c3dd28
+=======
+guid: 7b7a12f5bd6b34c49b796670f0f85ecd
+>>>>>>> origin/JoJo:3D_Project/Assets/Package/StudioBillion/House Interior/Scenes/House Interior - Lightning Settings.lighting.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 0

@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:3D_Project/Assets/Game/Players/FollowCamera .prefab.meta
 guid: 2e9e222848201ff4897ba22e1187eefd
+=======
+guid: 7d30a5fb0fd933143ab86fe78f6afd16
+>>>>>>> origin/JoJo:3D_Project/Assets/Prefabs/Ninja.prefab.meta
 PrefabImporter:
   externalObjects: {}
   userData: 

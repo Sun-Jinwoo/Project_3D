@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:3D_Project/Assets/Game/Package/StudioBillion/House Interior/Materials/laptop_screen.mat.meta
 guid: 9efe77fea0e71b845919594d5ae2961c
+=======
+guid: ce95247ea5b12ab4782d694ca23e46c3
+>>>>>>> origin/JoJo:3D_Project/Assets/Package/StudioBillion/House Interior/Materials/laptop_screen.mat.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 0

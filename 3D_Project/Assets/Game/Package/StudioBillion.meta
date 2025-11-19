@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:3D_Project/Assets/Game/Package/StudioBillion.meta
 guid: b937158677e0792448e62eeab1449a6e
+=======
+guid: 1b12ccdb6384cd640829b31177c3effb
+>>>>>>> origin/JoJo:3D_Project/Assets/Package/StudioBillion.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

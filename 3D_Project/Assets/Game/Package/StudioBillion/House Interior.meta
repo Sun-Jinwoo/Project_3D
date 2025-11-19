@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:3D_Project/Assets/Game/Package/StudioBillion/House Interior.meta
 guid: 282561c0ebd59c6458ecfb5cc9d40497
+=======
+guid: 1c4549bf3c6671a4c89fa5afd4096791
+>>>>>>> origin/JoJo:3D_Project/Assets/Package/StudioBillion/House Interior.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

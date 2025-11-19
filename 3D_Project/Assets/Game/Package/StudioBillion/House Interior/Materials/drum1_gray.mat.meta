@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:3D_Project/Assets/Game/Package/StudioBillion/House Interior/Materials/drum1_gray.mat.meta
 guid: d4d4311fe1846fc4cb2f6c3709660331
+=======
+guid: 8b308d70f7907264f9d3912f5efdc36c
+>>>>>>> origin/JoJo:3D_Project/Assets/Package/StudioBillion/House Interior/Materials/drum1_gray.mat.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 0

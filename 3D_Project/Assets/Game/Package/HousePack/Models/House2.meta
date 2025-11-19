@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:3D_Project/Assets/Game/Package/HousePack/Models/House2.meta
 guid: 0f7403f8e9d525841b94ca98990ff2ef
+=======
+guid: aec115a3de1d1e7468ceab17b92d8c52
+>>>>>>> origin/JoJo:3D_Project/Assets/Package/HousePack/Models/House2.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

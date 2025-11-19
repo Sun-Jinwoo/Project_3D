@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:3D_Project/Assets/Game/Package/BOXOPHOBIC/Skybox Cubemap Extended/Demo.meta
 guid: e0a52d85488481941917a8bba1ece361
+=======
+guid: 8f926c2524757934ca6828a4a5baedeb
+>>>>>>> origin/JoJo:3D_Project/Assets/Package/BOXOPHOBIC/Skybox Cubemap Extended/Demo.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

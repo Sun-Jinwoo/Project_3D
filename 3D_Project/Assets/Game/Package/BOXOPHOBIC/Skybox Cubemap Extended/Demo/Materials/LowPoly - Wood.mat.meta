@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:3D_Project/Assets/Game/Package/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Materials/LowPoly - Wood.mat.meta
 guid: 3b3ba281fdf73ff49a5ca7a1cd722c41
+=======
+guid: 384fb0ce3d4525e468c208d29dbce580
+>>>>>>> origin/JoJo:3D_Project/Assets/Package/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Materials/LowPoly - Wood.mat.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 0

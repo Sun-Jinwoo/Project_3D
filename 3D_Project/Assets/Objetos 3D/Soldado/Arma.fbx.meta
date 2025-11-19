@@ -1,7 +1,13 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:3D_Project/Assets/Objetos 3D/Soldado/Arma.fbx.meta
 guid: 0f853be3a2d21e044b2baee8e370a531
 ModelImporter:
   serializedVersion: 24200
+========
+guid: 1501646006cdc7044887ef0ae9bb4124
+ModelImporter:
+  serializedVersion: 21300
+>>>>>>>> origin/JoJo:3D_Project/Assets/Game/ModularHousePack1/Art/Meshs/Curtain.fbx.meta
   internalIDToNameTable: []
   externalObjects: {}
   materials:
@@ -14,8 +20,10 @@ ModelImporter:
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
-    removeConstantScaleCurves: 0
+    removeConstantScaleCurves: 1
     motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -38,7 +46,10 @@ ModelImporter:
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
+<<<<<<<< HEAD:3D_Project/Assets/Objetos 3D/Soldado/Arma.fbx.meta
     importPhysicalCameras: 1
+========
+>>>>>>>> origin/JoJo:3D_Project/Assets/Game/ModularHousePack1/Art/Meshs/Curtain.fbx.meta
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
@@ -56,9 +67,6 @@ ModelImporter:
     maxBonesPerVertex: 4
     minBoneWeight: 0.001
     optimizeBones: 1
-    generateMeshLods: 0
-    meshLodGenerationFlags: 0
-    maximumMeshLod: -1
     meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
@@ -69,7 +77,10 @@ ModelImporter:
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
+<<<<<<<< HEAD:3D_Project/Assets/Objetos 3D/Soldado/Arma.fbx.meta
     strictVertexDataChecks: 0
+========
+>>>>>>>> origin/JoJo:3D_Project/Assets/Game/ModularHousePack1/Art/Meshs/Curtain.fbx.meta
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -102,9 +113,22 @@ ModelImporter:
   humanoidOversampling: 1
   avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+<<<<<<<< HEAD:3D_Project/Assets/Objetos 3D/Soldado/Arma.fbx.meta
   importBlendShapeDeformPercent: 1
+========
+>>>>>>>> origin/JoJo:3D_Project/Assets/Game/ModularHousePack1/Art/Meshs/Curtain.fbx.meta
   remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+<<<<<<<< HEAD:3D_Project/Assets/Objetos 3D/Soldado/Arma.fbx.meta
+========
+AssetOrigin:
+  serializedVersion: 1
+  productId: 236466
+  packageName: Modular House Pack 1
+  packageVersion: 1.0
+  assetPath: Assets/ModularHousePack1/Art/Meshs/Curtain.fbx
+  uploadId: 547248
+>>>>>>>> origin/JoJo:3D_Project/Assets/Game/ModularHousePack1/Art/Meshs/Curtain.fbx.meta
