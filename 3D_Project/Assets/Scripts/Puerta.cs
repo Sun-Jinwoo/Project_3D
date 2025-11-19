@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Door : MonoBehaviour
+public class Puerta : MonoBehaviour
 {
     public Transform doorModel;
     public float openAngle = 90f;
@@ -50,5 +50,10 @@ public class Door : MonoBehaviour
         }
 
         isMoving = false;
+    }
+
+    internal void Abrir()
+    {
+        throw new System.NotImplementedException();
     }
 }

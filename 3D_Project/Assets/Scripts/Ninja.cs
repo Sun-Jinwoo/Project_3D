@@ -9,6 +9,7 @@ public class Ninja : MonoBehaviour
     public Transform Head;
     public float MoveSpeed = 5f;
     public float TurnSmoothing = 5f;
+    public float interactDistance = 2f;
 
     public static Ninja Instance;
 
@@ -38,7 +39,6 @@ public class Ninja : MonoBehaviour
 
     void Update()
     {
-        // Movement
         moveInput.x = Input.GetAxisRaw("Horizontal");
         moveInput.z = Input.GetAxisRaw("Vertical");
 
@@ -47,6 +47,8 @@ public class Ninja : MonoBehaviour
         moveFactor.y = 0f;
         moveFactor.Normalize();
         moveFactor *= moveMagnitude;
+
+        Interactuar();
     }
 
     private void FixedUpdate()
@@ -54,9 +56,38 @@ public class Ninja : MonoBehaviour
         if (!GameManager.Instance.GameOver)
         {
             myRigidbody.MovePosition(transform.position + moveFactor * MoveSpeed * Time.deltaTime);
+
             if (moveFactor != Vector3.zero)
             {
                 Model.rotation = Quaternion.Lerp(Model.rotation, Quaternion.LookRotation(moveFactor), Time.deltaTime * TurnSmoothing);
+            }
+        }
+    }
+
+    void Interactuar()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Ray r = new Ray(Head.position, MyCamera.transform.forward);
+            if (Physics.Raycast(r, out RaycastHit hit, interactDistance))
+            {
+                Puerta p = hit.collider.GetComponent<Puerta>();
+                if (p != null)
+                {
+                    p.Abrir();
+                    Security s = Object.FindFirstObjectByType<Security>();
+                    if (s != null) s.IniciarDespertar();
+                    return;
+                }
+
+                CasaLuz luz = hit.collider.GetComponent<CasaLuz>();
+                if (luz != null)
+                {
+                    luz.Encender();
+                    Security s = Object.FindFirstObjectByType<Security>();
+                    if (s != null) s.DespertarAnticipado();
+                    return;
+                }
             }
         }
     }

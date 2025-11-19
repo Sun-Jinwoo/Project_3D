@@ -18,6 +18,12 @@ public class Security : MonoBehaviour
     public float DetectionAngle = 30f;
     public LayerMask MyLayerMask;
 
+    public float tiempoDespertar = 5f;
+    bool despertarActivado = false;
+    float tiempoActual;
+    public bool npcDespierto = false;
+
+    
     Rigidbody myRigidbody;
     bool detectedPlayer;
     bool movingTowardsPatrolStart;
@@ -38,6 +44,21 @@ public class Security : MonoBehaviour
 
         timer = Object.FindFirstObjectByType<TimerManager>();
     }
+
+    public void IniciarDespertar()
+{
+    if (!despertarActivado && !npcDespierto)
+    {
+        despertarActivado = true;
+        tiempoActual = tiempoDespertar;
+    }
+}
+
+public void DespertarAnticipado()
+{
+    npcDespierto = true;
+    despertarActivado = false;
+}
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -74,12 +95,33 @@ public class Security : MonoBehaviour
         {
             ViewSpriteRenderer.color = NotDetectedColor;
         }
+
+        if (despertarActivado && !npcDespierto)
+{
+    tiempoActual -= Time.deltaTime;
+
+    if (tiempoActual <= 0)
+    {
+        npcDespierto = true;
+        despertarActivado = false;
     }
+}
+
+if (!npcDespierto)
+{
+    return;
+}
+    }
+
 
     private void FixedUpdate()
     {
         if (!GameManager.Instance.GameOver)
         {
+            if (!npcDespierto)
+    return;
+
+
             detectedPlayer = false;
 
             // deteccion del jugador
