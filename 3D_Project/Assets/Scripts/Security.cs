@@ -23,7 +23,8 @@ public class Security : MonoBehaviour
     float tiempoActual;
     public bool npcDespierto = false;
 
-    
+    public Transform player;
+
     Rigidbody myRigidbody;
     bool detectedPlayer;
     bool movingTowardsPatrolStart;
@@ -46,30 +47,26 @@ public class Security : MonoBehaviour
     }
 
     public void IniciarDespertar()
-{
-    if (!despertarActivado && !npcDespierto)
     {
-        despertarActivado = true;
-        tiempoActual = tiempoDespertar;
+        if (!despertarActivado && !npcDespierto)
+        {
+            despertarActivado = true;
+            tiempoActual = tiempoDespertar;
+        }
     }
-}
 
-public void DespertarAnticipado()
-{
-    npcDespierto = true;
-    despertarActivado = false;
-}
+    public void DespertarAnticipado()
+    {
+        npcDespierto = true;
+        despertarActivado = false;
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.rigidbody)
+        if (collision.collider.CompareTag("Player"))
         {
-            Ninja ninja = collision.rigidbody.GetComponent<Ninja>();
-            if (ninja)
-            {
-                GameManager.Instance.GameOver = true;
-                GameManager.Instance.GameOverPanel.SetActive(true);
-            }
+            GameManager.Instance.GameOver = true;
+            GameManager.Instance.GameOverPanel.SetActive(true);
         }
     }
 
@@ -97,73 +94,66 @@ public void DespertarAnticipado()
         }
 
         if (despertarActivado && !npcDespierto)
-{
-    tiempoActual -= Time.deltaTime;
+        {
+            tiempoActual -= Time.deltaTime;
 
-    if (tiempoActual <= 0)
-    {
-        npcDespierto = true;
-        despertarActivado = false;
+            if (tiempoActual <= 0)
+            {
+                npcDespierto = true;
+                despertarActivado = false;
+            }
+        }
+
+        if (!npcDespierto)
+        {
+            return;
+        }
     }
-}
-
-if (!npcDespierto)
-{
-    return;
-}
-    }
-
 
     private void FixedUpdate()
     {
-        if (!GameManager.Instance.GameOver)
+        if (GameManager.Instance.GameOver)
+            return;
+
+        if (!npcDespierto)
+            return;
+
+        if (player == null)
+            return;
+
+        detectedPlayer = false;
+
+        // deteccion del jugador
+        if (Vector3.Distance(transform.position, player.position) <= DetectionRadius)
         {
-            if (!npcDespierto)
-    return;
+            Vector3 positionDelta = player.position - transform.position;
 
-
-            detectedPlayer = false;
-
-            // deteccion del jugador
-            if (Vector3.Distance(transform.position, Ninja.Instance.transform.position) <= DetectionRadius)
+            if (Vector3.Angle(Model.forward, positionDelta) <= DetectionAngle * 0.5f)
             {
-                Vector3 positionDelta = Ninja.Instance.transform.position - transform.position;
-
-                if (Vector3.Angle(Model.forward, positionDelta) <= DetectionAngle * 0.5f)
+                if (!Physics.Raycast(Head.position, positionDelta, positionDelta.magnitude, MyLayerMask))
                 {
-                    if (!Physics.Raycast(Head.position, positionDelta, positionDelta.magnitude, MyLayerMask))
-                    {
-                        detectedPlayer = true;
-
-                        // activar temporizador al detectar jugador
-                        timer?.ActivarTemporizador();
-                    }
+                    detectedPlayer = true;
+                    timer?.ActivarTemporizador();
                 }
             }
+        }
 
-            // si detecta jugador, lo persigue
-            if (detectedPlayer)
+        // si detecta jugador, lo persigue
+        if (detectedPlayer)
+        {
+            Move(player.position, MoveSpeed);
+        }
+        else if (PatrolStart && PatrolEnd)
+        {
+            if (movingTowardsPatrolStart)
             {
-                Move(Ninja.Instance.transform.position, MoveSpeed);
+                if (Move(PatrolStart.position, PatrolSpeed))
+                    movingTowardsPatrolStart = false;
             }
-
-            // patrulla entre dos puntos
-            else if (PatrolStart && PatrolEnd)
+            else
             {
-                if (movingTowardsPatrolStart)
-                {
-                    if (Move(PatrolStart.position, PatrolSpeed))
-                    {
-                        movingTowardsPatrolStart = false;
-                    }
-                }
-                else
-                {
-                    if (Move(PatrolEnd.position, PatrolSpeed))
-                    {
-                        movingTowardsPatrolStart = true;
-                    }
-                }
+                if (Move(PatrolEnd.position, PatrolSpeed))
+                    movingTowardsPatrolStart = true;
             }
         }
     }

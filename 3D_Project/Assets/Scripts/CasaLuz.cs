@@ -3,16 +3,16 @@ using UnityEngine;
 public class CasaLuz : MonoBehaviour
 {
     public Light luz;
-    public bool encendida = false;
 
-    void Start()
+    public bool encendida;
+
+    public void Toggle()
     {
-        if (luz) luz.enabled = false;
+        encendida = !encendida;
+        if (luz != null)
+            luz.enabled = encendida;
+
     }
 
-    public void Encender()
-    {
-        encendida = true;
-        luz.enabled = true;
-    }
+    
 }

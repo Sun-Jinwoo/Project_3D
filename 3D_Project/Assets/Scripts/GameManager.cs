@@ -5,27 +5,51 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance;
+
+    public int dineroTotal = 0;
+    public int itemsRequeridos = 3;
+    public int itemsActuales = 0;
+
+    public float tiempoInicio;
+    public float tiempoFinal;
+
     public TextMeshProUGUI TimerTMP;
     public GameObject GameOverPanel;
-    public GameObject VictoryPanel;
 
     public bool GameOver { get; set; }
     public bool Vault { get; set; }
-
-    public static GameManager Instance;
 
     private void Awake()
     {
         Instance = this;
         GameOverPanel.SetActive(false);
-        VictoryPanel.SetActive(false);
     }
 
-    private void Update()
+    void Start()
+    {
+        tiempoInicio = Time.time;
+    }
+
+    void Update()
     {
         if (!GameOver)
         {
-            TimerTMP.text = string.Format("Time: {0:D1}:{1:D2}", Mathf.FloorToInt(Time.time / 60f), Mathf.FloorToInt(Time.time % 60f));
+            float t = Time.time - tiempoInicio;
+            TimerTMP.text = string.Format("Time: {0:D2}:{1:D2}",
+                Mathf.FloorToInt(t / 60f),
+                Mathf.FloorToInt(t % 60f));
         }
+    }
+
+    public void SumarDinero(int cant)
+    {
+        dineroTotal += cant;
+        itemsActuales++;
+    }
+
+    public void RegistrarTiempoFinal()
+    {
+        tiempoFinal = Time.time - tiempoInicio;
     }
 }

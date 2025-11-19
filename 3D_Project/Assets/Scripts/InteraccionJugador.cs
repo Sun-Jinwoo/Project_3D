@@ -9,10 +9,11 @@ public class InteraccionJugador : MonoBehaviour
     {
         Debug.DrawRay(spine.position, spine.forward * interactDistance, Color.red, 0.2f);
 
-
         if (Input.GetKeyDown(KeyCode.E))
         {
             Ray r = new Ray(spine.position, spine.forward);
+            Debug.DrawRay(spine.position, spine.forward * interactDistance, Color.red, 0.2f);
+
             if (Physics.Raycast(r, out RaycastHit hit, interactDistance))
             {
                 Puerta p = hit.collider.GetComponent<Puerta>();
@@ -24,15 +25,32 @@ public class InteraccionJugador : MonoBehaviour
                     return;
                 }
 
+                BotonLuz btn = hit.collider.GetComponent<BotonLuz>();
+                if (btn != null)
+                {
+                    btn.Activar();
+                    return;
+                }
+
+                Item item = hit.collider.GetComponent<Item>();
+                if (item != null)
+                {
+                    item.Recoger();
+                    return;
+                }
+
+
                 CasaLuz luz = hit.collider.GetComponent<CasaLuz>();
                 if (luz != null)
                 {
-                    luz.Encender();
+                    luz.Toggle();
                     Security s = Object.FindFirstObjectByType<Security>();
                     if (s != null) s.DespertarAnticipado();
                     return;
                 }
             }
         }
+
+
     }
 }

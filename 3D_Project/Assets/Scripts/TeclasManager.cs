@@ -32,14 +32,14 @@ public class TeclasManager : MonoBehaviour
         else if (paso == 1 && Input.GetKeyDown(KeyCode.E))
         {
             paso++;
-            mensaje.text = "Presiona F para agarrar un Objeto";
+            mensaje.text = "Presiona E para agarrar un Objeto";
         }
-        else if (paso == 2 && Input.GetKey(KeyCode.F))
+        else if (paso == 2 && Input.GetKeyDown(KeyCode.E))
         {
             paso++;
-            mensaje.text = "Mantén CTRL para agacharte";
+            mensaje.text = "Presiona E para Apagar o Prender las luces";
         }
-        else if (paso == 3 && Input.GetKey(KeyCode.LeftControl))
+        else if (paso == 3 && Input.GetKey(KeyCode.E))
         {
             paso++;
             mensaje.text = "¡Buen trabajo! Ahora explora la casa.";

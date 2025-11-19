@@ -7,6 +7,7 @@ TagManager:
   - ObjetoAgarrable
   - Ground
   - DeathZone
+  - InteriorLight
   layers:
   - Default
   - TransparentFX

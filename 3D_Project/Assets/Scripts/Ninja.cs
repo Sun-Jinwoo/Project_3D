@@ -32,7 +32,6 @@ public class Ninja : MonoBehaviour
         else if (other.name == "Escape" && GameManager.Instance.Vault)
         {
             GameManager.Instance.GameOver = true;
-            GameManager.Instance.VictoryPanel.SetActive(true);
         }
         Debug.Log(other.name);
     }
@@ -83,7 +82,7 @@ public class Ninja : MonoBehaviour
                 CasaLuz luz = hit.collider.GetComponent<CasaLuz>();
                 if (luz != null)
                 {
-                    luz.Encender();
+                    luz.Toggle();
                     Security s = Object.FindFirstObjectByType<Security>();
                     if (s != null) s.DespertarAnticipado();
                     return;
