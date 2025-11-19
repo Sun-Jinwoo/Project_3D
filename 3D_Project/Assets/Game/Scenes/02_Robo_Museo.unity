@@ -9672,7 +9672,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 811279088}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8205e9e4bda68c4409a9c4787159c207, type: 3}
   m_Name: 
@@ -19065,7 +19065,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1500146034}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8205e9e4bda68c4409a9c4787159c207, type: 3}
   m_Name: 
@@ -20776,10 +20776,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 191992, guid: 087d79cceb11dfe4fa37c516de002f03, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1954857562}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 087d79cceb11dfe4fa37c516de002f03, type: 3}
 --- !u!1 &1676936829 stripped
 GameObject:
@@ -24053,30 +24050,11 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: afab603a92c8d764c9e50de0364cf19b, type: 3}
---- !u!1 &1954857557 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 191992, guid: 087d79cceb11dfe4fa37c516de002f03, type: 3}
-  m_PrefabInstance: {fileID: 1675986801}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1954857561 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 462158, guid: 087d79cceb11dfe4fa37c516de002f03, type: 3}
   m_PrefabInstance: {fileID: 1675986801}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1954857562
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1954857557}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8205e9e4bda68c4409a9c4787159c207, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Interactive_Object
-  amplitud: 0.1
-  velocidad: 2
 --- !u!1001 &1958831389
 PrefabInstance:
   m_ObjectHideFlags: 0
