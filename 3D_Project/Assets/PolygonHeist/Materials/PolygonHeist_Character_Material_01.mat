@@ -1,6 +1,10 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+<<<<<<< HEAD
 --- !u!114 &-778061570246261416
+=======
+--- !u!114 &-3266073046967657653
+>>>>>>> CamiloTenorio
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,10 +45,14 @@ Material:
     m_TexEnvs:
     - _BaseMap:
 <<<<<<< HEAD
+<<<<<<< HEAD
         m_Texture: {fileID: 2800000, guid: 19ce65074840f3b449f9104e54031b43, type: 3}
 =======
         m_Texture: {fileID: 0}
 >>>>>>> origin/JoJo
+=======
+        m_Texture: {fileID: 0}
+>>>>>>> CamiloTenorio
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -118,6 +126,7 @@ Material:
     - _EmissionScaleUI: 0
     - _EnvironmentReflections: 1
 <<<<<<< HEAD
+<<<<<<< HEAD
     - _GlossMapScale: 0
     - _Glossiness: 0.5
     - _GlossyReflections: 0
@@ -126,6 +135,11 @@ Material:
     - _Glossiness: 0.5
     - _GlossyReflections: 1
 >>>>>>> origin/JoJo
+=======
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+>>>>>>> CamiloTenorio
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -151,6 +165,7 @@ Material:
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- !u!114 &2037066952893223693
 MonoBehaviour:
   m_ObjectHideFlags: 11
@@ -166,3 +181,5 @@ MonoBehaviour:
   version: 10
 =======
 >>>>>>> origin/JoJo
+=======
+>>>>>>> CamiloTenorio

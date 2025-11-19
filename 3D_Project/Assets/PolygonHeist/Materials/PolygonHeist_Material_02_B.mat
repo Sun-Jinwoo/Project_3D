@@ -1,6 +1,10 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+<<<<<<< HEAD
 --- !u!114 &-5803264413493635309
+=======
+--- !u!114 &-5985358712413677397
+>>>>>>> CamiloTenorio
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,10 +45,14 @@ Material:
     m_TexEnvs:
     - _BaseMap:
 <<<<<<< HEAD
+<<<<<<< HEAD
         m_Texture: {fileID: 2800000, guid: ae9cf7630a0102941af5aae819cd3aa4, type: 3}
 =======
         m_Texture: {fileID: 0}
 >>>>>>> origin/JoJo
+=======
+        m_Texture: {fileID: 0}
+>>>>>>> CamiloTenorio
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -118,6 +126,7 @@ Material:
     - _EmissionScaleUI: 0
     - _EnvironmentReflections: 1
 <<<<<<< HEAD
+<<<<<<< HEAD
     - _GlossMapScale: 0
     - _Glossiness: 0.2
     - _GlossyReflections: 0
@@ -126,6 +135,11 @@ Material:
     - _Glossiness: 0.2
     - _GlossyReflections: 1
 >>>>>>> origin/JoJo
+=======
+    - _GlossMapScale: 1
+    - _Glossiness: 0.2
+    - _GlossyReflections: 1
+>>>>>>> CamiloTenorio
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -133,10 +147,14 @@ Material:
     - _QueueOffset: 0
     - _ReceiveShadows: 1
 <<<<<<< HEAD
+<<<<<<< HEAD
     - _Smoothness: 0.2
 =======
     - _Smoothness: 0.5
 >>>>>>> origin/JoJo
+=======
+    - _Smoothness: 0.5
+>>>>>>> CamiloTenorio
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -155,6 +173,7 @@ Material:
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 --- !u!114 &2673050189630900087
 MonoBehaviour:
@@ -170,3 +189,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Editor::UnityEditor.Rendering.Universal.AssetVersion
   version: 10
 >>>>>>> origin/JoJo
+=======
+>>>>>>> CamiloTenorio

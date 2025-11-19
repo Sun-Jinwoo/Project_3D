@@ -12,12 +12,17 @@ TagManager:
   serializedVersion: 3
   tags:
   - ObjetoAgarrable
+<<<<<<< HEAD
   - Ground
   - DeathZone
 <<<<<<< HEAD
 >>>>>>> origin/Julian-Sanchez-3.1
 =======
 >>>>>>> origin/JoJo
+=======
+  - objeto
+  - Collectible
+>>>>>>> CamiloTenorio
   layers:
   - Default
   - TransparentFX
@@ -26,9 +31,9 @@ TagManager:
   - Water
   - UI
   - Obstacles
-  - Torreta 1
-  - Torreta 2
-  - NPC
+  - ObjetoAgarrado
+  - Ground
+  - 
   - 
   - 
   - 

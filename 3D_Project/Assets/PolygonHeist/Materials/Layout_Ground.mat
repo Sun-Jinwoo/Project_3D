@@ -114,6 +114,7 @@ Material:
     - _EmissionScaleUI: 0
     - _EnvironmentReflections: 1
 <<<<<<< HEAD
+<<<<<<< HEAD
     - _GlossMapScale: 0
     - _Glossiness: 0.5
     - _GlossyReflections: 0
@@ -122,6 +123,11 @@ Material:
     - _Glossiness: 0.5
     - _GlossyReflections: 1
 >>>>>>> origin/JoJo
+=======
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+>>>>>>> CamiloTenorio
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -140,19 +146,28 @@ Material:
     - _ZWrite: 1
     m_Colors:
 <<<<<<< HEAD
+<<<<<<< HEAD
     - _BaseColor: {r: 0.45588237, g: 0.45588237, b: 0.45588237, a: 1}
     - _Color: {r: 0.45588237, g: 0.45588237, b: 0.45588237, a: 1}
 =======
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
 >>>>>>> origin/JoJo
+=======
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+>>>>>>> CamiloTenorio
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColorUI: {r: 1, g: 1, b: 1, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- !u!114 &7319108801866330100
+=======
+--- !u!114 &634683013246808146
+>>>>>>> CamiloTenorio
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -165,5 +180,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Editor::UnityEditor.Rendering.Universal.AssetVersion
   version: 10
+<<<<<<< HEAD
 =======
 >>>>>>> origin/JoJo
+=======
+>>>>>>> CamiloTenorio

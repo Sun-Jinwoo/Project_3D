@@ -9,10 +9,14 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: PolygonHeist_Material_02_C
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
 =======
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
 >>>>>>> origin/JoJo
+=======
+  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+>>>>>>> CamiloTenorio
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
@@ -23,20 +27,30 @@ Material:
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> CamiloTenorio
   stringTagMap:
     RenderType: Opaque
   disabledShaderPasses:
   - MOTIONVECTORS
+<<<<<<< HEAD
 =======
   stringTagMap: {}
   disabledShaderPasses: []
 >>>>>>> origin/JoJo
+=======
+>>>>>>> CamiloTenorio
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
+<<<<<<< HEAD
         m_Texture: {fileID: 2800000, guid: cafb570959bf25a459dbc3dde7fccad8, type: 3}
+=======
+        m_Texture: {fileID: 0}
+>>>>>>> CamiloTenorio
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -60,7 +74,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: cafb570959bf25a459dbc3dde7fccad8, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -76,6 +90,9 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> CamiloTenorio
     - _SpecGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -92,8 +109,11 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+<<<<<<< HEAD
 =======
 >>>>>>> origin/JoJo
+=======
+>>>>>>> CamiloTenorio
     m_Ints: []
     m_Floats:
     - _AddPrecomputedVelocity: 0
@@ -112,6 +132,7 @@ Material:
     - _DstBlendAlpha: 0
     - _EmissionScaleUI: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
     - _Glossiness: 0.2
@@ -121,16 +142,28 @@ Material:
     - _Glossiness: 0.2
     - _GlossyReflections: 1
 >>>>>>> origin/JoJo
+=======
+    - _EnvironmentReflections: 1
+    - _GlossMapScale: 1
+    - _Glossiness: 0.2
+    - _GlossyReflections: 1
+>>>>>>> CamiloTenorio
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+<<<<<<< HEAD
 <<<<<<< HEAD
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _Smoothness: 0.2
 =======
 >>>>>>> origin/JoJo
+=======
+    - _QueueOffset: 0
+    - _ReceiveShadows: 1
+    - _Smoothness: 0.5
+>>>>>>> CamiloTenorio
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -146,10 +179,17 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColorUI: {r: 1, g: 1, b: 1, a: 1}
 <<<<<<< HEAD
+<<<<<<< HEAD
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &6757605580835746841
+=======
+    - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
+--- !u!114 &4740507130117372400
+>>>>>>> CamiloTenorio
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -162,7 +202,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Editor::UnityEditor.Rendering.Universal.AssetVersion
   version: 10
+<<<<<<< HEAD
 =======
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 >>>>>>> origin/JoJo
+=======
+>>>>>>> CamiloTenorio

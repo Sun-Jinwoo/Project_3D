@@ -23,19 +23,27 @@ Material:
   m_Name: PolygonHeist_Material_01_B
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_Parent: {fileID: 2100000, guid: 940ecf1f021e2cb4c91b55e2d8f82a9e, type: 2}
 =======
   m_Parent: {fileID: 0}
 >>>>>>> origin/JoJo
+=======
+  m_Parent: {fileID: 0}
+>>>>>>> CamiloTenorio
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _EMISSION
   m_InvalidKeywords: []
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_LightmapFlags: 4
 =======
   m_LightmapFlags: 1
 >>>>>>> origin/JoJo
+=======
+  m_LightmapFlags: 1
+>>>>>>> CamiloTenorio
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -49,8 +57,11 @@ Material:
     m_TexEnvs:
     - _BaseMap:
 <<<<<<< HEAD
+<<<<<<< HEAD
         m_Texture: {fileID: 2800000, guid: 8257f53634c19744385f537c0cf00f38, type: 3}
 =======
+=======
+>>>>>>> CamiloTenorio
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -159,7 +170,11 @@ Material:
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
+<<<<<<< HEAD
 --- !u!114 &1926311353446624042
+=======
+--- !u!114 &463379317073129836
+>>>>>>> CamiloTenorio
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -172,4 +187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Editor::UnityEditor.Rendering.Universal.AssetVersion
   version: 10
+<<<<<<< HEAD
 >>>>>>> origin/JoJo
+=======
+>>>>>>> CamiloTenorio
