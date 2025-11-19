@@ -1,6 +1,10 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+<<<<<<< HEAD:3D_Project/Assets/SimpleAirport/_Materials/SimpleAirport.mat
+--- !u!114 &-5548697121715616113
+=======
 --- !u!114 &-8111935294713447013
+>>>>>>> ilomilo:3D_Project/Assets/Game/SimpleAirport/_Materials/SimpleAirport.mat
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

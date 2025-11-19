@@ -127,7 +127,11 @@ Material:
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
+<<<<<<< HEAD:3D_Project/Assets/SimpleAirport/_Materials/SimpleAirport_Worker_01_Black.mat
+--- !u!114 &8191834952064138629
+=======
 --- !u!114 &9014442678772960745
+>>>>>>> ilomilo:3D_Project/Assets/Game/SimpleAirport/_Materials/SimpleAirport_Worker_01_Black.mat
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

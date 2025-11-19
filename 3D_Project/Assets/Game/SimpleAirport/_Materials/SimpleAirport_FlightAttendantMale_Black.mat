@@ -1,6 +1,10 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+<<<<<<< HEAD:3D_Project/Assets/SimpleAirport/_Materials/SimpleAirport_FlightAttendantMale_Black.mat
+--- !u!114 &-8861166120791255501
+=======
 --- !u!114 &-6650009901728746523
+>>>>>>> ilomilo:3D_Project/Assets/Game/SimpleAirport/_Materials/SimpleAirport_FlightAttendantMale_Black.mat
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
