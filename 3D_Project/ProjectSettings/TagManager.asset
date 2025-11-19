@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - Collectible
+  - ObjetoAgarrable
+  - DeathZone
+  - TMP_Text
+  - contador
   layers:
   - Default
   - TransparentFX

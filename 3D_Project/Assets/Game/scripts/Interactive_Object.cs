@@ -1,36 +1,35 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;  // Necesario para cargar escenas
+Ôªøusing UnityEngine;
+using UnityEngine.SceneManagement;
+using TMPro;
 
 public class Interactive_Object : MonoBehaviour
 {
-    [Header("ConfiguraciÛn del movimiento")]
     public float amplitud = 0.5f;
     public float velocidad = 1f;
 
-    [Header("Contador y UI")]
-    public static int contadorDestruidos = 0;  // Contador est·tico para contar las destrucciones
-    public TextMesh textoContador;  // Referencia a TextMesh para mostrar el contador
+    public static int contadorDestruidos = 0;
 
+    private TMP_Text textoContador;
     private float posInicialY;
 
     void Start()
     {
         posInicialY = transform.position.y;
 
-        // Si el TextMesh no est· asignado, lo buscamos en el objeto que lo contiene
-        if (textoContador == null)
+        GameObject textoObj = GameObject.FindWithTag("contador");
+        Debug.Log("¬øEncontr√≥ el objeto con tag Contador? ‚Üí " + (textoObj != null));
+
+        if (textoObj != null)
         {
-            textoContador = FindObjectOfType<TextMesh>();
+            textoContador = textoObj.GetComponent<TMP_Text>();
+            Debug.Log("¬øTMP_Text encontrado? ‚Üí " + (textoContador != null));
         }
 
-        ActualizarContador();  // Actualiza el texto del contador al inicio
+        ActualizarContador();
     }
 
     void Update()
     {
-        // Movimiento oscilante
         float nuevaY = posInicialY + Mathf.Sin(Time.time * velocidad) * amplitud;
 
         transform.position = new Vector3(
@@ -42,44 +41,26 @@ public class Interactive_Object : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // Cuando el objeto es destruido
         Destroy(gameObject);
 
-        // Incrementar el contador de objetos destruidos
         contadorDestruidos++;
 
-        // Actualizar el texto del contador
+        Debug.Log("Contador actual: " + contadorDestruidos);
+
         ActualizarContador();
 
-        // Si el contador llega a 12, cargar la siguiente escena
-        if (contadorDestruidos >= 11)
+        if (contadorDestruidos >= 10)  // ‚Üê AHORA SON 10
         {
-            CargarSiguienteEscena();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
+
 
     private void ActualizarContador()
     {
-        // Actualiza el texto del contador en la escena
         if (textoContador != null)
         {
-            textoContador.text = "Objetos Destruidos: " + contadorDestruidos;
-        }
-    }
-
-    private void CargarSiguienteEscena()
-    {
-        // Cargar la siguiente escena
-        // Aseg˙rate de tener una escena configurada con el Ìndice correcto en Build Settings de Unity
-        int siguienteEscenaIndex = SceneManager.GetActiveScene().buildIndex + 1;
-        if (siguienteEscenaIndex < SceneManager.sceneCountInBuildSettings)
-        {
-            SceneManager.LoadScene("05_Robo_Zona_Militar");
-        }
-        else
-        {
-            Debug.Log("No hay m·s escenas en la lista de Build Settings.");
+            textoContador.text = contadorDestruidos.ToString();
         }
     }
 }
-
