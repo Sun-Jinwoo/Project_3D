@@ -1,7 +1,7 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class NPC_A : MonoBehaviour
 {
@@ -39,21 +39,11 @@ public class NPC_A : MonoBehaviour
     private float tiempoSinVer = 0f;
     private bool buscandoDireccion = true;
 
-    // ---------------------- CAPTURA ----------------------
-    private bool jugadorInmovilizado = false;
-    private bool puedeCapturar = true;
-    private int contadorLiberacion = 0;
-    private float tiempoLiberacion = 0f;
-    private float tiempoMaxLiberacion = 7f;
-    private float cooldownCaptura = 4f;
-    private float tiempoNPCQuieto = 3f;
-
-    private MonoBehaviour scriptMovimientoJugador; // guarda el script de movimiento
-
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         CambiarColor(materialNormal);
+
         if (waypoints.Length > 0)
         {
             agent.speed = speedPatrulla;
@@ -67,48 +57,38 @@ public class NPC_A : MonoBehaviour
 
         switch (estadoActual)
         {
-            case EstadoNPC.Patrulla:
-                Patrullar();
-                break;
-            case EstadoNPC.Sospecha:
-                ModoSospecha();
-                break;
-            case EstadoNPC.Persecucion:
-                ModoPersecucion();
-                break;
-            case EstadoNPC.Busqueda:
-                ModoBusqueda();
-                break;
-            case EstadoNPC.Captura:
-                ModoCaptura();
-                break;
+            case EstadoNPC.Patrulla: Patrullar(); break;
+            case EstadoNPC.Sospecha: ModoSospecha(); break;
+            case EstadoNPC.Persecucion: ModoPersecucion(); break;
+            case EstadoNPC.Busqueda: ModoBusqueda(); break;
+            case EstadoNPC.Captura: ModoCaptura(); break;
         }
 
         Debug.DrawRay(transform.position + Vector3.up * 0.4f, transform.forward * rangoCorto, Color.red);
         Debug.DrawRay(transform.position + Vector3.up * 0.4f, transform.forward * rangoLargo, Color.yellow);
     }
 
-    // ---------------------- DETECCIÓN ----------------------
+    // --------------------- DETECCIÓN ----------------------------
+
     void DetectarJugador()
     {
-        if (!puedeCapturar) return; // no puede capturar durante cooldown
-
         if (jugador == null)
         {
             GameObject playerObj = GameObject.FindGameObjectWithTag(playerTag);
-            if (playerObj != null)
-                jugador = playerObj.transform;
+            if (playerObj != null) jugador = playerObj.transform;
         }
 
-        if (jugador == null || estadoActual == EstadoNPC.Captura) return;
+        if (jugador == null) return;
+        if (estadoActual == EstadoNPC.Captura) return;
 
-        Vector3 direccion = (jugador.position - transform.position).normalized;
+        Vector3 dir = (jugador.position - transform.position).normalized;
         float distancia = Vector3.Distance(transform.position, jugador.position);
-        float angulo = Vector3.Angle(transform.forward, direccion);
-        bool dentroFOV = angulo < (anguloVision / 2f);
+        float angulo = Vector3.Angle(transform.forward, dir);
 
+        bool dentroFOV = angulo < anguloVision / 2f;
         bool lineaDeVista = false;
-        if (dentroFOV && Physics.Raycast(transform.position + Vector3.up * 0.4f, direccion, out RaycastHit hit, rangoLargo))
+
+        if (dentroFOV && Physics.Raycast(transform.position + Vector3.up * 0.4f, dir, out RaycastHit hit, rangoLargo))
         {
             if (hit.collider.CompareTag(playerTag))
                 lineaDeVista = true;
@@ -126,7 +106,8 @@ public class NPC_A : MonoBehaviour
         }
     }
 
-    // ---------------------- PATRULLA ----------------------
+    // --------------------------- ESTADOS ----------------------------
+
     void Patrullar()
     {
         if (!agent.pathPending && agent.remainingDistance < 0.3f)
@@ -136,7 +117,6 @@ public class NPC_A : MonoBehaviour
         }
     }
 
-    // ---------------------- SOSPECHA ----------------------
     void ModoSospecha()
     {
         agent.speed = speedPatrulla * 1.2f;
@@ -154,7 +134,6 @@ public class NPC_A : MonoBehaviour
         }
     }
 
-    // ---------------------- PERSECUCIÓN ----------------------
     void ModoPersecucion()
     {
         if (jugador == null) return;
@@ -165,15 +144,15 @@ public class NPC_A : MonoBehaviour
 
         float distancia = Vector3.Distance(transform.position, jugador.position);
 
-        if (distancia <= distanciaMinimaAlJugador && puedeCapturar)
+        if (distancia <= distanciaMinimaAlJugador)
         {
-            agent.isStopped = true;
             CambiarEstado(EstadoNPC.Captura);
             return;
         }
 
-        Vector3 direccion = (jugador.position - transform.position).normalized;
-        if (!Physics.Raycast(transform.position + Vector3.up * 0.4f, direccion, out RaycastHit hit, rangoCorto) ||
+        Vector3 dir = (jugador.position - transform.position).normalized;
+
+        if (!Physics.Raycast(transform.position + Vector3.up * 0.4f, dir, out RaycastHit hit, rangoCorto) ||
             !hit.collider.CompareTag(playerTag))
         {
             tiempoSinVer += Time.deltaTime;
@@ -189,17 +168,18 @@ public class NPC_A : MonoBehaviour
         }
     }
 
-    // ---------------------- BÚSQUEDA ----------------------
     void ModoBusqueda()
     {
         CambiarColor(materialBusqueda);
         agent.speed = speedPatrulla;
+
         tiempoSinVer += Time.deltaTime;
 
-        // Gira de lado a lado simulando búsqueda visual
         float rotacion = buscandoDireccion ? anguloBusqueda : -anguloBusqueda;
         transform.Rotate(Vector3.up * rotacion * Time.deltaTime);
-        if (Random.value < 0.01f) buscandoDireccion = !buscandoDireccion;
+
+        if (Random.value < 0.01f)
+            buscandoDireccion = !buscandoDireccion;
 
         if (tiempoSinVer >= tiempoBusqueda)
         {
@@ -208,86 +188,19 @@ public class NPC_A : MonoBehaviour
         }
     }
 
-    // ---------------------- CAPTURA ----------------------
+    // ------------------ CAPTURA → GAME OVER DIRECTO ---------------
+
     void ModoCaptura()
     {
-        if (jugador == null) return;
         CambiarColor(materialAlerta);
-
-        // Inmoviliza solo el movimiento, no la cámara
-        if (!jugadorInmovilizado)
-        {
-            jugadorInmovilizado = true;
-            tiempoLiberacion = 0f;
-            contadorLiberacion = 0;
-
-            // Desactiva solo el script de movimiento del jugador
-            scriptMovimientoJugador = jugador.GetComponent<MonoBehaviour>();
-            if (scriptMovimientoJugador != null)
-                scriptMovimientoJugador.enabled = false;
-
-            // Mostrar UI de liberación
-            EscapeUI ui = FindObjectOfType<EscapeUI>();
-            if (ui != null)
-                ui.Mostrar();
-        }
-
-        tiempoLiberacion += Time.deltaTime;
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            contadorLiberacion++;
-            EscapeUI ui = FindObjectOfType<EscapeUI>();
-            if (ui != null)
-                ui.AgregarProgreso();
-        }
-
-        EscapeUI uiCheck = FindObjectOfType<EscapeUI>();
-        if (uiCheck != null && uiCheck.Completado() && tiempoLiberacion <= tiempoMaxLiberacion)
-        {
-            StartCoroutine(LiberarJugador());
-        }
-        else if (tiempoLiberacion > tiempoMaxLiberacion)
-        {
-            contadorLiberacion = 0;
-            tiempoLiberacion = 0f;
-            if (uiCheck != null)
-                uiCheck.Reiniciar();
-        }
-    }
-
-    // ---------------------- LIBERACIÓN DEL JUGADOR ----------------------
-    private IEnumerator LiberarJugador()
-    {
-        // Reactiva el movimiento del jugador
-        if (scriptMovimientoJugador != null)
-            scriptMovimientoJugador.enabled = true;
-
-        // Oculta UI de liberación
-        EscapeUI ui = FindObjectOfType<EscapeUI>();
-        if (ui != null)
-            ui.Ocultar();
-
-        jugadorInmovilizado = false;
-        puedeCapturar = false;
-        CambiarColor(materialBusqueda);
         agent.isStopped = true;
 
-        // Empuja ligeramente al jugador hacia atrás al liberarse
-        Vector3 direccionEscape = (jugador.position - transform.position).normalized;
-        jugador.position += direccionEscape * 2f;
-
-        yield return new WaitForSeconds(tiempoNPCQuieto);
-
-        agent.isStopped = false;
-        CambiarEstado(EstadoNPC.Busqueda);
-
-        // Cooldown de captura
-        yield return new WaitForSeconds(cooldownCaptura);
-        puedeCapturar = true;
+        // 🔥 Fin inmediato del juego
+        SceneManager.LoadScene("GameOver");
     }
 
-    // ---------------------- CAMBIO DE ESTADO ----------------------
+    // -------------------------- CAMBIO DE ESTADO ------------------------
+
     void CambiarEstado(EstadoNPC nuevoEstado)
     {
         if (estadoActual == nuevoEstado) return;
@@ -298,22 +211,22 @@ public class NPC_A : MonoBehaviour
         {
             case EstadoNPC.Patrulla:
                 CambiarColor(materialNormal);
-                agent.isStopped = false;
                 agent.speed = speedPatrulla;
+                agent.isStopped = false;
                 agent.destination = waypoints[currentWaypoint].position;
                 break;
 
             case EstadoNPC.Sospecha:
                 CambiarColor(materialSospecha);
-                agent.isStopped = false;
                 agent.speed = speedPatrulla * 1.2f;
+                agent.isStopped = false;
                 agent.destination = ultimaPosicionVista;
                 break;
 
             case EstadoNPC.Persecucion:
                 CambiarColor(materialAlerta);
+                agent.speed = speedPersecusion;
                 agent.isStopped = false;
-                agent.speed = speedPatrulla * 1.8f;
                 break;
 
             case EstadoNPC.Busqueda:
@@ -322,25 +235,27 @@ public class NPC_A : MonoBehaviour
                 break;
 
             case EstadoNPC.Captura:
-                CambiarColor(materialAlerta);
                 agent.isStopped = true;
                 break;
         }
     }
-    public void RecibirAlarma(Vector3 puntoAlarma)
+
+    // -------------------------- ALARMA ------------------------------
+
+    public void RecibirAlarma(Vector3 punto)
     {
         StopAllCoroutines();
         buscandoDireccion = true;
         CambiarColor(materialBusqueda);
-        StartCoroutine(MoverAlPuntoDeAlarma(puntoAlarma));
+        StartCoroutine(MoverAlPuntoDeAlarma(punto));
     }
 
     private IEnumerator MoverAlPuntoDeAlarma(Vector3 punto)
     {
         while (Vector3.Distance(transform.position, punto) > 1f)
         {
-            Vector3 direccion = (punto - transform.position).normalized;
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direccion), Time.deltaTime * 3);
+            Vector3 dir = (punto - transform.position).normalized;
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * 3);
             agent.SetDestination(punto);
             yield return null;
         }
@@ -348,8 +263,8 @@ public class NPC_A : MonoBehaviour
         ModoBusqueda();
     }
 
+    // ------------------------- VISUAL ---------------------------
 
-    // ---------------------- VISUAL ----------------------
     void CambiarColor(Material mat)
     {
         if (indicadorRenderer != null && mat != null)
