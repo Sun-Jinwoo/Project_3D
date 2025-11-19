@@ -3,35 +3,24 @@ using UnityEngine;
 public class Puerta : MonoBehaviour
 {
     public Transform doorModel;
-    public float openAngle = 90f;
+    public float openAngle = -90f;
     public float speed = 3f;
-    public float interactDistance = 2f;
 
     bool isOpen;
     bool isMoving;
 
-    Transform player;
-
     void Start()
     {
-        player = Object.FindFirstObjectByType<Ninja>().transform;
+        if (doorModel == null) doorModel = transform;
     }
 
-    void Update()
+    public void Abrir()
     {
-        if (player == null) return;
+        if (isMoving) return;
 
-        float dist = Vector3.Distance(player.position, transform.position);
-
-        if (dist <= interactDistance && Input.GetKeyDown(KeyCode.E))
-        {
-            if (!isMoving)
-            {
-                isOpen = !isOpen;
-                StopAllCoroutines();
-                StartCoroutine(MoveDoor());
-            }
-        }
+        isOpen = !isOpen;
+        StopAllCoroutines();
+        StartCoroutine(MoveDoor());
     }
 
     System.Collections.IEnumerator MoveDoor()
@@ -50,10 +39,5 @@ public class Puerta : MonoBehaviour
         }
 
         isMoving = false;
-    }
-
-    internal void Abrir()
-    {
-        throw new System.NotImplementedException();
     }
 }
